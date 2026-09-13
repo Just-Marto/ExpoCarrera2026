@@ -5,123 +5,216 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1a1a2e;
-    color: #eee;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #e8eaed;
+    color: #333;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header estilo Moodle ── */
+.site-header {
+    background: #2b3a4e;
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.site-logo {
+    width: 40px;
+    height: 40px;
+    background: #f0ad4e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2b3a4e;
+    flex-shrink: 0;
+}
+
+.site-header h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.site-header .site-subtitle {
+    font-size: 0.75rem;
+    color: #a8b8c8;
+    margin-top: 1px;
+}
+
+/* ── Contenido principal ── */
+.main-content {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 20px;
 }
 
+/* ── Caja de login ── */
 .login-container {
-    background: #16213e;
-    border-radius: 12px;
-    padding: 40px;
+    background: white;
+    border-radius: 4px;
+    padding: 32px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 380px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+    border: 1px solid #d4d8dc;
 }
 
-.login-container h1 {
+.login-container .login-title {
     text-align: center;
-    margin-bottom: 8px;
-    color: #e94560;
-    font-size: 1.5rem;
-}
-
-.login-container .subtitle {
-    text-align: center;
-    color: #888;
-    margin-bottom: 30px;
-    font-size: 0.9rem;
+    margin-bottom: 24px;
+    color: #2b3a4e;
+    font-size: 1.15rem;
+    font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
-    color: #aaa;
+    margin-bottom: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #555;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    background: #0f3460;
-    color: #eee;
-    font-size: 1rem;
+    padding: 8px 12px;
+    border: 1px solid #bbc0c5;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    font-size: 0.9rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .form-group input:focus {
-    border-color: #e94560;
+    border-color: #4a90d9;
+    box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.2);
 }
 
 .btn {
     width: 100%;
-    padding: 12px;
-    background: #e94560;
+    padding: 10px;
+    background: #4a90d9;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.15s;
+    margin-top: 4px;
 }
 
 .btn:hover {
-    background: #c73650;
+    background: #3a7bc8;
+}
+
+.login-help {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.login-help a {
+    color: #4a90d9;
+    text-decoration: none;
 }
 
 .error-msg {
-    background: #ff4444;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    background: #fce4e4;
+    color: #c33;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    border: 1px solid #f5c6c6;
 }
 
-/* Dashboard */
+/* ── Dashboard ── */
 .dashboard {
     text-align: center;
-    background: #16213e;
-    border-radius: 12px;
+    background: white;
+    border-radius: 4px;
     padding: 40px;
     max-width: 500px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+    border: 1px solid #d4d8dc;
 }
 
 .dashboard h1 {
-    color: #4ecca3;
-    margin-bottom: 16px;
+    color: #2b3a4e;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
 }
 
 .dashboard p {
-    color: #ccc;
-    margin-bottom: 20px;
+    color: #666;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+.dashboard .user-info {
+    background: #f0f4f8;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 24px;
+    border: 1px solid #d4d8dc;
+}
+
+.dashboard .user-info .user-avatar {
+    width: 56px;
+    height: 56px;
+    background: #4a90d9;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .btn-secondary {
     display: inline-block;
-    padding: 10px 24px;
-    background: #0f3460;
-    color: #eee;
-    border: 1px solid #333;
-    border-radius: 8px;
+    padding: 8px 20px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.2s;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.15s;
 }
 
 .btn-secondary:hover {
-    background: #1a4a7a;
+    background: #5a6268;
+}
+
+/* ── Footer ── */
+.site-footer {
+    background: #2b3a4e;
+    color: #a8b8c8;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.75rem;
 }
