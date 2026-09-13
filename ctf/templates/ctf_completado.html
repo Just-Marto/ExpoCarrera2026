@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberQuest — ¡Completado!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ctf.css') }}">
+</head>
+<body>
+    <header class="cq-header">
+        <div class="cq-brand">
+            <div class="cq-logo">CQ</div>
+            <div>
+                <h1>CyberQuest</h1>
+                <div class="cq-subtitle">Desafío de ciberseguridad</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-bar-container">
+        <div class="progress-info">
+            <span class="progress-label">Tu progreso</span>
+            <span class="progress-count">{{ total }}/{{ total }} completados</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" style="width: 100%"></div>
+        </div>
+    </div>
+
+    <div class="cq-main">
+        <div class="completion">
+            <div class="completion-icon">🏆</div>
+            <h1>¡Completaste el desafío!</h1>
+            <p>Resolviste los 4 pasos del CTF. En el camino aprendiste sobre inspección de código fuente, codificación Base64, archivos ocultos en servidores, y el formato de flags en competencias de ciberseguridad.</p>
+
+            <div class="flag-display">CTF{cortafuegos}</div>
+
+            <p style="font-size: 0.85rem;">Estas técnicas son las mismas que usan los profesionales de seguridad para encontrar vulnerabilidades y proteger sistemas.</p>
+
+            <div class="completion-actions">
+                <a href="{{ url_for('ctf.reset') }}" class="btn-next">Reiniciar y jugar de nuevo</a>
+                <a href="{{ url_for('login.login_page') }}" class="btn-outline">Ir al desafío de SQL Injection →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="cq-footer">CyberQuest — Expo Ciberseguridad 2026</footer>
+</body>
+</html>

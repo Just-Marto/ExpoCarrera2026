@@ -1,0 +1,484 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header CyberQuest ── */
+.cq-header {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cq-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cq-logo {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #00d4aa, #0096c7);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #0d1117;
+    font-weight: 800;
+}
+
+.cq-brand h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f0f6fc;
+}
+
+.cq-brand .cq-subtitle {
+    font-size: 0.7rem;
+    color: #8b949e;
+    margin-top: 1px;
+}
+
+.cq-header-actions a {
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    transition: all 0.15s;
+}
+
+.cq-header-actions a:hover {
+    color: #f0f6fc;
+    border-color: #8b949e;
+}
+
+/* ── Barra de progreso ── */
+.progress-bar-container {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 12px 24px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.progress-label {
+    font-size: 0.85rem;
+    color: #8b949e;
+}
+
+.progress-count {
+    font-size: 0.85rem;
+    color: #00d4aa;
+    font-weight: 600;
+}
+
+.progress-track {
+    height: 8px;
+    background: #21262d;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4aa, #0096c7);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* ── Main content ── */
+.cq-main {
+    flex: 1;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+}
+
+.cq-main h2 {
+    color: #f0f6fc;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+/* ── Task cards ── */
+.task-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.task-card--active {
+    border-color: #00d4aa;
+    cursor: pointer;
+}
+
+.task-card--active:hover {
+    background: #1c2129;
+    border-color: #00d4aa;
+}
+
+.task-card--completed {
+    border-color: #238636;
+    background: #0d1117;
+}
+
+.task-card--locked {
+    opacity: 0.5;
+}
+
+.task-check {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #30363d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.task-check--done {
+    background: #238636;
+    border-color: #238636;
+    color: white;
+}
+
+.task-check--active {
+    border-color: #00d4aa;
+    color: #00d4aa;
+}
+
+.task-body {
+    flex: 1;
+}
+
+.task-body h3 {
+    color: #f0f6fc;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.task-body p {
+    color: #8b949e;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.task-arrow {
+    color: #30363d;
+    font-size: 1.2rem;
+}
+
+.task-card--active .task-arrow {
+    color: #00d4aa;
+}
+
+.task-num {
+    color: #00d4aa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+/* ── Página de paso individual ── */
+.paso-container {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+}
+
+.paso-header {
+    margin-bottom: 24px;
+}
+
+.paso-header .back-link {
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.paso-header .back-link:hover {
+    color: #00d4aa;
+}
+
+.paso-header h2 {
+    color: #f0f6fc;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.paso-header p {
+    color: #8b949e;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ── Challenge area ── */
+.challenge-area {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.challenge-area h3 {
+    color: #f0f6fc;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.challenge-content {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+    color: #e6edf3;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+/* ── Answer form ── */
+.answer-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.answer-input {
+    flex: 1;
+    padding: 10px 14px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #f0f6fc;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.answer-input:focus {
+    border-color: #00d4aa;
+}
+
+.answer-input::placeholder {
+    color: #484f58;
+}
+
+.btn-submit {
+    padding: 10px 20px;
+    background: #00d4aa;
+    color: #0d1117;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.btn-submit:hover {
+    background: #00e6b8;
+}
+
+/* ── Hints ── */
+.hints-section {
+    margin-top: 20px;
+}
+
+.hint-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #8b949e;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.hint-btn:hover {
+    border-color: #f0ad4e;
+    color: #f0ad4e;
+}
+
+.hint-btn--revealed {
+    border-color: #f0ad4e;
+    color: #f0ad4e;
+    background: rgba(240, 173, 78, 0.1);
+}
+
+.hint-icon {
+    font-size: 0.9rem;
+}
+
+.hint-text {
+    background: #1c2129;
+    border: 1px solid #30363d;
+    border-left: 3px solid #f0ad4e;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #c9d1d9;
+    line-height: 1.5;
+}
+
+/* ── Messages ── */
+.msg-error {
+    background: rgba(248, 81, 73, 0.1);
+    border: 1px solid #f85149;
+    color: #f85149;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+}
+
+.msg-success {
+    background: rgba(35, 134, 54, 0.15);
+    border: 1px solid #238636;
+    color: #3fb950;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.btn-next {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #00d4aa;
+    color: #0d1117;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-top: 8px;
+}
+
+.btn-next:hover {
+    background: #00e6b8;
+}
+
+/* ── Completion screen ── */
+.completion {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.completion-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+}
+
+.completion h1 {
+    color: #00d4aa;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.completion p {
+    color: #8b949e;
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+}
+
+.completion .flag-display {
+    background: #161b22;
+    border: 2px solid #00d4aa;
+    border-radius: 8px;
+    padding: 16px 32px;
+    display: inline-block;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 1.2rem;
+    color: #00d4aa;
+    margin-bottom: 24px;
+}
+
+.completion-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.15s;
+}
+
+.btn-outline:hover {
+    border-color: #8b949e;
+    color: #f0f6fc;
+}
+
+/* ── Footer ── */
+.cq-footer {
+    background: #161b22;
+    border-top: 1px solid #30363d;
+    color: #484f58;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.72rem;
+}

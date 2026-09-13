@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberQuest — Paso 4</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ctf.css') }}">
+</head>
+<body>
+    <header class="cq-header">
+        <div class="cq-brand">
+            <div class="cq-logo">CQ</div>
+            <div>
+                <h1>CyberQuest</h1>
+                <div class="cq-subtitle">Desafío de ciberseguridad</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-bar-container">
+        <div class="progress-info">
+            <span class="progress-label">Tu progreso</span>
+            <span class="progress-count">{{ completados|length }}/{{ total }}</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" style="width: {{ (completados|length / total * 100)|int }}%"></div>
+        </div>
+    </div>
+
+    <div class="paso-container">
+        <div class="paso-header">
+            <a href="{{ url_for('ctf.dashboard') }}" class="back-link">← Volver al panel</a>
+            <div class="task-num">Paso 4 de {{ total }}</div>
+            <h2>{{ paso.titulo }}</h2>
+            <p>{{ paso.descripcion }}</p>
+        </div>
+
+        {% if error %}
+        <div class="msg-error">{{ error }}</div>
+        {% endif %}
+
+        <div class="challenge-area">
+            <h3>Entregá la flag</h3>
+            <p style="color: #8b949e; margin-bottom: 12px;">En competencias de ciberseguridad (CTF = Capture The Flag), las respuestas se entregan en un formato especial llamado "flag".</p>
+            <div class="challenge-content">
+                Formato: <span style="color: #00d4aa;">CTF{palabra}</span><br><br>
+                Usá la última palabra clave que encontraste para armar la flag completa.
+            </div>
+
+            <form method="POST" action="{{ url_for('ctf.verificar', num=4) }}">
+                <div class="answer-form">
+                    <input type="text" name="respuesta" class="answer-input" placeholder="CTF{...}" required autofocus>
+                    <button type="submit" class="btn-submit">Entregar flag</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="hints-section">
+            <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitás ayuda?</h3>
+            {% for pista in paso.pistas %}
+            <button class="hint-btn" onclick="toggleHint(this, 'hint-{{ loop.index }}')">
+                <span class="hint-icon">💡</span> Pista {{ loop.index }}
+            </button>
+            {% endfor %}
+
+            {% for pista in paso.pistas %}
+            <div id="hint-{{ loop.index }}" class="hint-text" style="display: none;">{{ pista|safe }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="cq-footer">CyberQuest — Expo Ciberseguridad 2026</footer>
+
+    <script>
+    function toggleHint(btn, id) {
+        var hint = document.getElementById(id);
+        if (hint.style.display === 'none') {
+            hint.style.display = 'block';
+            btn.classList.add('hint-btn--revealed');
+        } else {
+            hint.style.display = 'none';
+            btn.classList.remove('hint-btn--revealed');
+        }
+    }
+    </script>
+</body>
+</html>

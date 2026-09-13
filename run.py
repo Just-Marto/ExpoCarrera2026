@@ -11,12 +11,15 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = "expo-ciberseguridad-2026-demo"
 
     from login_vulnerable.db import init_db
     from login_vulnerable.routes import login_bp
+    from ctf.routes import ctf_bp
 
     init_db()
     app.register_blueprint(login_bp)
+    app.register_blueprint(ctf_bp)
 
     return app
 
