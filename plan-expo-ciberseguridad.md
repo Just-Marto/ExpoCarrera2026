@@ -67,34 +67,67 @@
 > "Dejá la app corriendo en localhost. Creá un script (o instrucción única) para levantar todo con un solo comando, así el día de la expo lo arranco sin pensar. Documentalo en el README."
 
 **Entregable verificable:**
-- Con un solo comando levantás la web y jugás en `http://localhost:5000` desde la propia notebook
-- (No se necesita red ni otros dispositivos — el visitante juega en tu pantalla)
+### 1e. A prueba de todo (agregar sobre lo ya hecho en el Paso 1)
+
+Como Claude Code ya está trabajando el login, pasale esto como ajuste, no como algo nuevo:
+
+**Prompt:**
+> "Sobre el login que ya estamos armando, agregá dos cosas pensadas para una expo donde
+> lo va a usar público general (incluida gente sin conocimientos técnicos):
+> 1. Que NINGUNA entrada rara del usuario rompa la app ni muestre un error feo de Python.
+>    Si alguien escribe cualquier cosa, la web responde de forma controlada.
+> 2. Un botón bien visible de 'volver al inicio' / 'reiniciar', para que después de que
+>    una persona juega, la siguiente arranque limpio sin que yo toque nada.
+> Explicame qué cambiaste."
+
+**Entregable verificable:**
+- Escribís basura en los campos y la web no se cuelga ni muestra error de Python
+- Después de ganar, el botón de reinicio deja todo listo para el próximo visitante
 
 ---
 
-## Paso 2 — CTF de 3-4 pasos (Día 2)
+## Paso 2 — CTF de 3-4 pasos (nivel OPCIONAL "para los que quieren más")
 
-Cadena de desafío que el visitante resuelve en ~5 min. Cada paso da la pista del siguiente.
+**Concepto de diseño clave:** el CTF NO es para todo el mundo. Se presenta como un
+desafío **opcional** para el visitante que ya pasó el login y se copó. El login (Paso 1)
+es el "nivel todos" — rápido, garantizado, con la pista servida. El CTF es el "nivel
+techo alto" para quien tiene curiosidad técnica. Así nadie se frustra: el despistado
+juega el login y se va contento, el capo se queda con el CTF.
+
+Regla de oro del CTF: **piso bajo, ayuda graduada.** Cada paso debe poder resolverse
+con la hoja de misión sola, sin que vos tengas que estar al lado. Nadie se traba en el
+paso 1 y abandona.
 
 **Prompt para el conjunto:**
-> "Creá un mini-CTF web de 4 pasos encadenados, servido como sitio estático o Flask:
-> 1. **Pista en el código fuente**: una página normal con una pista escondida en un comentario HTML (se encuentra con F12/ver código fuente).
-> 2. **Base64**: la pista es un texto en Base64 que hay que decodificar para obtener una URL o palabra.
+> "Creá un mini-CTF web de 4 pasos encadenados, servido con Flask, presentado como
+> desafío OPCIONAL (no obligatorio). Cada paso da la pista del siguiente:
+> 1. **Pista en el código fuente**: una página con una pista escondida en un comentario HTML (se encuentra con F12 / ver código fuente).
+> 2. **Base64**: la pista es un texto en Base64 que hay que decodificar.
 > 3. **Archivo oculto**: esa pista lleva a un archivo (ej. /robots.txt o un .txt escondido) con el siguiente dato.
-> 4. **Flag final**: una última página donde ingresan la palabra encontrada y ganan.
-> Explicame cómo funciona cada paso y dame las soluciones en un archivo `SOLUCIONES.md` aparte (para mí, no para los visitantes)."
+> 4. **Flag final**: una página donde ingresan la palabra encontrada y ganan.
+>
+> Requisitos importantes de diseño:
+> - Cada paso debe tener un sistema de PISTAS GRADUADAS: un botón 'pista' que revela
+>   una ayuda cada vez más explícita (pista suave → pista media → casi la respuesta).
+>   Así el visitante que se traba se destraba solo, sin frustrarse ni depender de mí.
+> - Que ninguna entrada rara del usuario rompa la app (manejo de errores).
+> - Dame las soluciones y las pistas graduadas en un archivo `SOLUCIONES.md` aparte (para mí)."
 
 **Entregable verificable:**
 - Resolvés vos el CTF de punta a punta siguiendo solo las pistas
-- Tenés el `SOLUCIONES.md` para ayudar a visitantes trabados
+- Probás el sistema de pistas graduadas: trabándote a propósito, las pistas te sacan adelante
+- Tenés el `SOLUCIONES.md`
 
 ### 2b. Hoja de misión (para imprimir)
 
 **Prompt:**
-> "Creá una 'hoja de misión' en HTML imprimible (o markdown) que le dé al visitante el contexto del CTF, las reglas, y un espacio para anotar las pistas que va encontrando. Tono de juego, tipo misión de espía."
+> "Creá una 'hoja de misión' en HTML imprimible que le dé al visitante: el contexto del
+> CTF, que es OPCIONAL y para quien quiera un desafío extra, las reglas, cómo pedir
+> pistas si se traba, y un espacio para anotar lo que va encontrando. Tono de juego,
+> tipo misión de espía. Dejá claro que 'está bien pedir pistas, no es hacer trampa'."
 
 **Entregable verificable:**
-- Documento listo para imprimir
+- Documento listo para imprimir, con el tono de "desafío opcional sin presión"
 
 ---
 
@@ -103,15 +136,18 @@ Cadena de desafío que el visitante resuelve en ~5 min. Cada paso da la pista de
 ### 3a. Cartelería y ranking
 
 **Prompt:**
-> "Creá los carteles para la estación: (1) un cartel grande de desafío '¿Podés entrar sin la contraseña?' con la pista del injection en letra chica, (2) instrucciones de acceso (la URL/IP), (3) una plantilla de pizarra de ranking para anotar quién completó el CTF. Formato imprimible."
+> "Creá los carteles para la estación: (1) un cartel grande de desafío '¿Podés entrar sin la contraseña?' con la pista del injection en letra chica, (2) un cartel más chico presentando el CTF como 'desafío OPCIONAL para los que quieren más', (3) una plantilla de pizarra de ranking para anotar quién completó el CTF. Formato imprimible."
 
 **Entregable verificable:**
 - Carteles listos para imprimir
 
 ### 3b. Gancho visual de fondo (opcional, si sobra tiempo)
 
+Nota: esto usa la VM Kali, es totalmente aparte de la demo web. Solo si te sobra tiempo
+y querés algo llamativo de fondo en una segunda pantalla.
+
 **Prompt:**
-> "Dame un script bash para correr en Kali que ejecute un `nmap` en loop contra el Ubuntu Server (10.0.2.3) mostrando output continuo en pantalla completa, como 'gancho visual' de fondo para la expo. Que se vea llamativo pero sea inofensivo."
+> "Dame un script bash para correr en Kali que ejecute un `nmap` en loop contra un target de mi laboratorio, mostrando output continuo en pantalla completa, como 'gancho visual' de fondo para la expo. Que se vea llamativo pero sea inofensivo."
 
 **Entregable verificable:**
 - El script corre en loop y se ve bien en una pantalla aparte

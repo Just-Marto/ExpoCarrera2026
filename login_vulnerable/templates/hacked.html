@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniDemo — ¡Login bypasseado!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-logo">U</div>
+        <div>
+            <h1>UniDemo — Campus Virtual</h1>
+            <div class="site-subtitle">Plataforma de gestión académica</div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="hacked-container">
+            <div class="hacked-banner">
+                <span class="hacked-icon">🔓</span>
+                <h1>¡Acceso no autorizado!</h1>
+                <p>Entraste como <strong>{{ username }}</strong> sin conocer la contraseña.</p>
+            </div>
+
+            <div class="explanation">
+                <h2>¿Qué acaba de pasar?</h2>
+                <p>Usaste una técnica llamada <strong>SQL Injection</strong>. En vez de escribir un nombre de usuario real, escribiste un fragmento de código SQL que engañó a la base de datos.</p>
+
+                <h3>Lo que escribiste:</h3>
+                <div class="code-block">
+                    <div><span class="label">Usuario:</span> <code>{{ payload_user }}</code></div>
+                    <div><span class="label">Contraseña:</span> <code>{{ payload_pass }}</code></div>
+                </div>
+
+                <h3>La consulta que ejecutó el servidor:</h3>
+                <div class="code-block">
+                    <code>{{ query }}</code>
+                </div>
+
+                <h3>¿Por qué funcionó?</h3>
+                <div class="step-list">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <p>El programador concatenó tu input directo en la consulta SQL, sin limpiarlo.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <p>Tu comilla <code>'</code> cerró el string que abrió el programador, y lo que sigue se interpreta como código SQL.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <p><code>OR '1'='1'</code> es una condición que <strong>siempre es verdadera</strong>, así que la base devuelve el primer usuario.</p>
+                    </div>
+                </div>
+
+                <h3>¿Cómo se previene?</h3>
+                <div class="prevention">
+                    <p>Con <strong>consultas parametrizadas</strong>: los datos del usuario viajan separados del comando SQL. Así la base de datos nunca confunde datos con instrucciones.</p>
+                    <div class="code-compare">
+                        <div class="code-bad">
+                            <div class="code-label">❌ Vulnerable (concatenación)</div>
+                            <code>f"SELECT * FROM usuarios WHERE username = '<span class="highlight-bad">{username}</span>'"</code>
+                        </div>
+                        <div class="code-good">
+                            <div class="code-label">✅ Segura (parametrizada)</div>
+                            <code>cursor.execute("SELECT * FROM usuarios WHERE username = <span class="highlight-good">?</span>", (username,))</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hacked-actions">
+                <a href="{{ url_for('login.login_seguro_page') }}" class="btn">Ver la versión segura</a>
+                <a href="{{ url_for('login.login_page') }}" class="btn-secondary">Volver a intentar</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        UniDemo Campus Virtual — Plataforma educativa de demostración
+    </footer>
+</body>
+</html>

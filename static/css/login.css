@@ -210,6 +210,242 @@ body {
     background: #5a6268;
 }
 
+/* ── Pantalla "hackeado" ── */
+.hacked-container {
+    background: white;
+    border-radius: 4px;
+    padding: 0;
+    width: 100%;
+    max-width: 640px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+    border: 1px solid #d4d8dc;
+    overflow: hidden;
+}
+
+.hacked-banner {
+    background: linear-gradient(135deg, #d9534f, #c9302c);
+    color: white;
+    padding: 28px 32px;
+    text-align: center;
+}
+
+.hacked-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.hacked-banner h1 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.hacked-banner p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.explanation {
+    padding: 28px 32px;
+}
+
+.explanation h2 {
+    color: #2b3a4e;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.explanation h3 {
+    color: #444;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.explanation p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.code-block {
+    background: #1e2a3a;
+    color: #e8e8e8;
+    padding: 14px 18px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.82rem;
+    overflow-x: auto;
+    line-height: 1.7;
+}
+
+.code-block .label {
+    color: #a8b8c8;
+}
+
+.code-block code {
+    color: #f0ad4e;
+}
+
+.step-list {
+    margin-top: 8px;
+}
+
+.step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    background: #4a90d9;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step p {
+    margin: 0;
+    padding-top: 3px;
+}
+
+.step code {
+    background: #f0f4f8;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    color: #c33;
+}
+
+.prevention {
+    background: #f0f8f0;
+    border: 1px solid #c3e6c3;
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 8px;
+}
+
+.prevention p {
+    margin-bottom: 12px;
+}
+
+.code-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.code-bad, .code-good {
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.78rem;
+    overflow-x: auto;
+}
+
+.code-bad {
+    background: #fce4e4;
+    border: 1px solid #f5c6c6;
+}
+
+.code-good {
+    background: #e8f5e9;
+    border: 1px solid #c3e6c3;
+}
+
+.code-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.highlight-bad {
+    color: #c33;
+    font-weight: 700;
+}
+
+.highlight-good {
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.hacked-actions {
+    padding: 20px 32px 28px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hacked-actions .btn {
+    width: auto;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* ── Versión segura ── */
+.site-header--secure {
+    background: #2e7d32;
+}
+
+.site-logo--secure {
+    background: #fff;
+    font-size: 1.1rem;
+}
+
+.secure-badge {
+    text-align: center;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6c3;
+}
+
+.btn--secure {
+    background: #2e7d32;
+}
+
+.btn--secure:hover {
+    background: #256d29;
+}
+
+.secure-explanation {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f0f4f8;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #555;
+    border: 1px solid #d4d8dc;
+}
+
+.secure-explanation p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.login-help code {
+    background: #f0f4f8;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    color: #c33;
+}
+
 /* ── Footer ── */
 .site-footer {
     background: #2b3a4e;
