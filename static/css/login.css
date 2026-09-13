@@ -59,6 +59,10 @@ body {
     padding: 40px 20px;
 }
 
+.main-content--top {
+    align-items: flex-start;
+}
+
 /* ── Caja de login ── */
 .login-container {
     background: white;
@@ -146,6 +150,91 @@ body {
     text-align: center;
     font-size: 0.85rem;
     border: 1px solid #f5c6c6;
+}
+
+/* ── Pistas graduadas en login ── */
+.hint-trigger {
+    text-align: center;
+    margin-top: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+.hint-trigger:hover {
+    background: #f0f4f8;
+}
+
+.hint-bulb {
+    font-size: 1.1rem;
+}
+
+.hint-trigger-text {
+    font-size: 0.8rem;
+    color: #999;
+    margin-left: 4px;
+}
+
+.hint-panel {
+    display: none;
+    margin-top: 12px;
+    border-top: 1px solid #e8eaed;
+    padding-top: 12px;
+}
+
+.hint-item {
+    margin-bottom: 10px;
+}
+
+.hint-header {
+    cursor: pointer;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #e8eaed;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    transition: background 0.15s;
+}
+
+.hint-header:hover {
+    background: #eef1f4;
+}
+
+.hint-bulb-small {
+    font-size: 0.85rem;
+}
+
+.hint-body {
+    display: none;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.6;
+    background: #fffbe6;
+    border: 1px solid #f0e6b3;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+}
+
+.hint-code {
+    display: inline-block;
+    background: #1e2a3a;
+    color: #f0ad4e;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    margin: 6px 0;
+}
+
+.hint-why {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #777;
 }
 
 /* ── Dashboard ── */
@@ -444,6 +533,52 @@ body {
     border-radius: 3px;
     font-size: 0.82rem;
     color: #c33;
+}
+
+/* ── Bridge infiltracion ── */
+.infiltration-bridge {
+    background: linear-gradient(135deg, #0d1117, #161b22);
+    color: white;
+    padding: 28px 32px;
+    text-align: center;
+}
+
+.bridge-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.infiltration-bridge h2 {
+    color: #00d4aa;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.infiltration-bridge p {
+    color: #8b949e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-ctf {
+    display: inline-block;
+    background: linear-gradient(135deg, #00d4aa, #0096c7);
+    color: #0d1117;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-ctf:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 212, 170, 0.3);
 }
 
 /* ── Footer ── */

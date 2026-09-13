@@ -11,13 +11,13 @@
         <div class="site-logo">U</div>
         <div>
             <h1>UniDemo — Campus Virtual</h1>
-            <div class="site-subtitle">Plataforma de gestión académica</div>
+            <div class="site-subtitle">Plataforma de gestion academica</div>
         </div>
     </header>
 
     <div class="main-content">
         <div class="login-container">
-            <div class="login-title">Iniciar sesión en su cuenta</div>
+            <div class="login-title">Iniciar sesion en su cuenta</div>
 
             {% if error %}
             <div class="error-msg">{{ error }}</div>
@@ -29,20 +29,67 @@
                     <input type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
+                    <label for="password">Contrasena</label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn">Acceder</button>
             </form>
 
             <div class="login-help">
-                ¿Olvidó su nombre de usuario o contraseña?
+                ¿Olvido su nombre de usuario o contrasena?
+            </div>
+
+            <div class="hint-trigger" onclick="toggleHints()">
+                <span class="hint-bulb">💡</span>
+                <span class="hint-trigger-text">¿No sabes por donde empezar?</span>
+            </div>
+
+            <div class="hint-panel" id="hintPanel">
+                <div class="hint-item" id="hint1">
+                    <div class="hint-header" onclick="revealHint(1)">
+                        <span class="hint-bulb-small">💡</span> Pista 1
+                    </div>
+                    <div class="hint-body" id="hintBody1">
+                        Este login tiene un problema: lo que escribis se mete directo en una consulta a la base de datos. ¿Que pasa si en vez de un nombre de usuario escribis algo que la base de datos interprete como codigo?
+                    </div>
+                </div>
+                <div class="hint-item" id="hint2" style="display: none;">
+                    <div class="hint-header" onclick="revealHint(2)">
+                        <span class="hint-bulb-small">💡</span> Pista 2 — La respuesta
+                    </div>
+                    <div class="hint-body" id="hintBody2">
+                        Escribi esto en el campo de usuario (o contrasena):<br>
+                        <code class="hint-code">' OR '1'='1</code><br>
+                        <span class="hint-why">La comilla <code>'</code> cierra el texto que espera la base de datos, y <code>OR '1'='1'</code> hace que la condicion siempre sea verdadera. Resultado: entras sin contrasena.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <footer class="site-footer">
-        UniDemo Campus Virtual — Plataforma educativa de demostración
+        UniDemo Campus Virtual — Plataforma educativa de demostracion
     </footer>
+
+    <script>
+        var hintsOpen = false;
+        var hint1Revealed = false;
+
+        function toggleHints() {
+            var panel = document.getElementById('hintPanel');
+            hintsOpen = !hintsOpen;
+            panel.style.display = hintsOpen ? 'block' : 'none';
+        }
+
+        function revealHint(num) {
+            var body = document.getElementById('hintBody' + num);
+            if (body.style.display === 'block') return;
+            body.style.display = 'block';
+            if (num === 1) {
+                hint1Revealed = true;
+                document.getElementById('hint2').style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>

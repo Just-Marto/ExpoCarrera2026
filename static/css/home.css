@@ -48,87 +48,73 @@ body {
     font-size: 1.05rem;
     color: #8b949e;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 auto 28px;
     line-height: 1.6;
 }
 
-.modules {
-    max-width: 800px;
+.hero-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #00d4aa, #0096c7);
+    color: #0d1117;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 212, 170, 0.3);
+}
+
+/* ── Briefing steps ── */
+.briefing {
+    max-width: 600px;
     margin: 0 auto;
     padding: 40px 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.module-card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 28px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s, transform 0.2s;
     display: flex;
     flex-direction: column;
+    gap: 16px;
 }
 
-.module-card:hover {
-    transform: translateY(-2px);
+.briefing-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
 }
 
-.module-card--login:hover {
-    border-color: #4a90d9;
+.briefing-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 212, 170, 0.15);
+    border: 1px solid rgba(0, 212, 170, 0.3);
+    color: #00d4aa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
-.module-card--ctf:hover {
-    border-color: #00d4aa;
-}
-
-.module-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
-}
-
-.module-tag {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-}
-
-.module-card--login .module-tag { color: #4a90d9; }
-.module-card--ctf .module-tag { color: #00d4aa; }
-
-.module-card h2 {
+.briefing-card h3 {
     color: #f0f6fc;
-    font-size: 1.15rem;
-    margin-bottom: 10px;
-    line-height: 1.3;
+    font-size: 1rem;
+    margin-bottom: 4px;
 }
 
-.module-card p {
+.briefing-card p {
     color: #8b949e;
     font-size: 0.85rem;
     line-height: 1.5;
-    flex: 1;
 }
-
-.module-time {
-    color: #484f58;
-    font-size: 0.78rem;
-    margin-top: 16px;
-    margin-bottom: 12px;
-}
-
-.module-cta {
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.module-card--login .module-cta { color: #4a90d9; }
-.module-card--ctf .module-cta { color: #00d4aa; }
 
 .home-footer {
     text-align: center;
@@ -139,6 +125,6 @@ body {
 }
 
 @media (max-width: 600px) {
-    .modules { grid-template-columns: 1fr; }
     .hero h1 { font-size: 1.8rem; }
+    .hero-cta { padding: 12px 28px; font-size: 1rem; }
 }
