@@ -1,8 +1,7 @@
 """
 Rutas del módulo de login vulnerable.
 
-Por ahora: validación CORRECTA con consultas parametrizadas.
-En el Paso 1b vamos a introducir la vulnerabilidad.
+VULNERABILIDAD INTENCIONAL — solo para demo educativa.
 """
 import sqlite3
 from flask import Blueprint, render_template, request, redirect, url_for
@@ -33,13 +32,12 @@ def login_submit():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    # Consulta parametrizada — SEGURA.
-    # Los signos ? son placeholders: SQLite inserta los valores
-    # de forma segura, sin mezclarlos con el SQL.
-    cursor.execute(
-        "SELECT * FROM usuarios WHERE username = ? AND password = ?",
-        (username, password),
-    )
+    # ⚠️ VULNERABLE: el input del usuario se concatena DIRECTO en el SQL.
+    # Esto permite SQL injection porque el motor de la base de datos no puede
+    # distinguir qué parte es "comando SQL" y qué parte es "dato del usuario".
+    query = f"SELECT * FROM usuarios WHERE username = '{username}' AND password = '{password}'"
+    cursor.execute(query)
+
     user = cursor.fetchone()
     conn.close()
 
