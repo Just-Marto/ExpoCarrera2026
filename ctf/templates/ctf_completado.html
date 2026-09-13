@@ -12,7 +12,7 @@
             <div class="cq-logo">CQ</div>
             <div>
                 <h1>CyberQuest</h1>
-                <div class="cq-subtitle">Desafío de ciberseguridad</div>
+                <div class="cq-subtitle">Desafio de ciberseguridad</div>
             </div>
         </div>
     </header>
@@ -30,16 +30,29 @@
     <div class="cq-main">
         <div class="completion">
             <div class="completion-icon">🏆</div>
-            <h1>¡Completaste el desafío!</h1>
-            <p>Resolviste los 4 pasos del CTF. En el camino aprendiste sobre inspección de código fuente, codificación Base64, archivos ocultos en servidores, y el formato de flags en competencias de ciberseguridad.</p>
+            <h1>¡Felicitaciones!</h1>
+            <p>Completaste los 4 desafios de CyberQuest. En el camino descubriste informacion oculta en codigo fuente, decodificaste mensajes en Base64, encontraste archivos de configuracion expuestos, y detectaste credenciales hardcodeadas.</p>
 
-            <div class="flag-display">CTF{cortafuegos}</div>
+            <div class="flag-display">CTF{seguridad_total}</div>
 
-            <p style="font-size: 0.85rem;">Estas técnicas son las mismas que usan los profesionales de seguridad para encontrar vulnerabilidades y proteger sistemas.</p>
+            <div class="completion-lessons">
+                <h3>Lo que aprendiste</h3>
+                <ul>
+                    <li><strong>Paso 1:</strong> Los comentarios en el codigo fuente pueden filtrar informacion sensible</li>
+                    <li><strong>Paso 2:</strong> Base64 no es encriptacion — cualquiera puede decodificarlo</li>
+                    <li><strong>Paso 3:</strong> Archivos de configuracion expuestos revelan datos internos del sistema</li>
+                    <li><strong>Paso 4:</strong> Credenciales hardcodeadas en el codigo son un error critico de seguridad</li>
+                </ul>
+            </div>
+
+            <div class="completion-message">
+                <p>Estas tecnicas son las mismas que usan los profesionales de ciberseguridad para proteger sistemas todos los dias.</p>
+                <p class="closing-quote">Por esto se necesitan Ingenieros en Sistemas: para construir software de calidad y seguro.</p>
+            </div>
 
             <div class="completion-actions">
                 <a href="{{ url_for('ctf.reset') }}" class="btn-next">Reiniciar y jugar de nuevo</a>
-                <a href="{{ url_for('login.login_page') }}" class="btn-outline">Ir al desafío de SQL Injection →</a>
+                <a href="/" class="btn-outline">Volver al inicio</a>
             </div>
         </div>
     </div>

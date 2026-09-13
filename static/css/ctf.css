@@ -289,6 +289,89 @@ body {
     overflow-x: auto;
 }
 
+/* ── Base64 Decoder panel ── */
+.decoder-panel {
+    background: #1c2129;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.decoder-panel h4 {
+    color: #f0f6fc;
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+}
+
+.decoder-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.decoder-field label {
+    display: block;
+    font-size: 0.75rem;
+    color: #8b949e;
+    margin-bottom: 4px;
+}
+
+.decoder-field textarea {
+    width: 100%;
+    padding: 8px 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    color: #f0f6fc;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85rem;
+    resize: none;
+    outline: none;
+}
+
+.decoder-field textarea:focus {
+    border-color: #00d4aa;
+}
+
+.decoder-btn {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.decoder-btn:hover {
+    background: #2ea043;
+}
+
+.decoder-output {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+    color: #484f58;
+    min-height: 38px;
+}
+
+.decoder-output--success {
+    color: #00d4aa;
+    border-color: rgba(0, 212, 170, 0.3);
+}
+
+.decoder-output--error {
+    color: #f85149;
+    border-color: rgba(248, 81, 73, 0.3);
+}
+
 /* ── Answer form ── */
 .answer-form {
     display: flex;
@@ -458,6 +541,59 @@ body {
     font-size: 1.2rem;
     color: #00d4aa;
     margin-bottom: 24px;
+}
+
+.completion-lessons {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 20px 24px;
+    max-width: 480px;
+    margin: 0 auto 24px;
+    text-align: left;
+}
+
+.completion-lessons h3 {
+    color: #f0f6fc;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.completion-lessons ul {
+    list-style: none;
+    padding: 0;
+}
+
+.completion-lessons li {
+    color: #8b949e;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    padding: 6px 0;
+    border-bottom: 1px solid #21262d;
+}
+
+.completion-lessons li:last-child {
+    border-bottom: none;
+}
+
+.completion-lessons li strong {
+    color: #00d4aa;
+}
+
+.completion-message {
+    max-width: 480px;
+    margin: 0 auto 28px;
+}
+
+.completion-message p {
+    font-size: 0.9rem;
+}
+
+.closing-quote {
+    color: #00d4aa !important;
+    font-size: 1.05rem !important;
+    font-weight: 600;
+    margin-top: 12px;
 }
 
 .completion-actions {

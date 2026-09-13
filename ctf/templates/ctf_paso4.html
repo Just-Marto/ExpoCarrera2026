@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ctf.css') }}">
 </head>
 <body>
+    <!-- ================================================== -->
+    <!-- DEBUG - Panel de administracion                     -->
+    <!-- TODO: quitar antes de subir a produccion!!          -->
+    <!-- Credencial de acceso: CTF{seguridad_total}          -->
+    <!-- ================================================== -->
+
     <header class="cq-header">
         <div class="cq-brand">
             <div class="cq-logo">CQ</div>
             <div>
                 <h1>CyberQuest</h1>
-                <div class="cq-subtitle">Desafío de ciberseguridad</div>
+                <div class="cq-subtitle">Desafio de ciberseguridad</div>
             </div>
         </div>
     </header>
@@ -40,23 +46,23 @@
         {% endif %}
 
         <div class="challenge-area">
-            <h3>Entregá la flag</h3>
-            <p style="color: #8b949e; margin-bottom: 12px;">En competencias de ciberseguridad (CTF = Capture The Flag), las respuestas se entregan en un formato especial llamado "flag".</p>
+            <h3>Panel de acceso restringido</h3>
+            <p style="color: #8b949e; margin-bottom: 12px;">Este panel requiere una credencial especial para acceder. Los desarrolladores del sistema dejaron la contrasena en un lugar donde no deberian...</p>
             <div class="challenge-content">
-                Formato: <span style="color: #00d4aa;">CTF{palabra}</span><br><br>
-                Usá la última palabra clave que encontraste para armar la flag completa.
+                <span style="color: #f0ad4e;">⚠️ ACCESO RESTRINGIDO</span><br><br>
+                <span style="color: #8b949e;">Este sistema tiene una falla comun: las credenciales estan hardcodeadas en el codigo fuente. Un error que pasa mas seguido de lo que pensas en sistemas reales.</span>
             </div>
 
             <form method="POST" action="{{ url_for('ctf.verificar', num=4) }}">
                 <div class="answer-form">
-                    <input type="text" name="respuesta" class="answer-input" placeholder="CTF{...}" required autofocus>
-                    <button type="submit" class="btn-submit">Entregar flag</button>
+                    <input type="text" name="respuesta" class="answer-input" placeholder="Ingresa la credencial..." required autofocus>
+                    <button type="submit" class="btn-submit">Acceder</button>
                 </div>
             </form>
         </div>
 
         <div class="hints-section">
-            <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitás ayuda?</h3>
+            <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitas ayuda?</h3>
             {% for pista in paso.pistas %}
             <button class="hint-btn" onclick="toggleHint(this, 'hint-{{ loop.index }}')">
                 <span class="hint-icon">💡</span> Pista {{ loop.index }}
@@ -72,6 +78,9 @@
     <footer class="cq-footer">CyberQuest — Expo Ciberseguridad 2026</footer>
 
     <script>
+    // TODO: limpiar antes de deploy
+    var admin_password = "CTF{seguridad_total}";
+
     function toggleHint(btn, id) {
         var hint = document.getElementById(id);
         if (hint.style.display === 'none') {

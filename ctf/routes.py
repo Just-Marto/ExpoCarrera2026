@@ -14,45 +14,46 @@ ctf_bp = Blueprint(
 
 # ── Definición de los 4 pasos ──
 # Cada paso tiene: título, descripción, respuesta correcta, y pistas graduadas.
+# IMPORTANTE: la pista 3 siempre da la respuesta directa (destraba al visitante).
 PASOS = {
     1: {
-        "titulo": "El código oculto",
-        "descripcion": "Esta página esconde algo que no se ve a simple vista. Los desarrolladores a veces dejan cosas en el código fuente...",
+        "titulo": "El codigo oculto",
+        "descripcion": "Esta pagina esconde algo que no se ve a simple vista. Los desarrolladores a veces dejan cosas en el codigo fuente...",
         "respuesta": "algoritmo",
         "pistas": [
-            "¿Sabías que podés ver el código fuente de cualquier página web? Probá con F12 o Ctrl+U.",
-            "Buscá comentarios HTML: son líneas que empiezan con &lt;!-- y terminan con --&gt;",
-            "El comentario dice: la clave es \"algoritmo\"",
+            "Los navegadores tienen herramientas para ver lo que hay 'detras' de una pagina web. Proba con F12 o Ctrl+U.",
+            "Busca comentarios HTML: son lineas que empiezan con &lt;!-- y terminan con --&gt;. Hay uno cerca del inicio del codigo.",
+            "La respuesta es: <strong>algoritmo</strong>",
         ],
     },
     2: {
         "titulo": "El mensaje cifrado",
-        "descripcion": "Encontraste un mensaje, pero está codificado. Los datos en internet muchas veces viajan disfrazados...",
-        "respuesta": "robots.txt",
+        "descripcion": "Interceptaste un mensaje codificado. Usa el decodificador integrado para descifrar que dice.",
+        "respuesta": "configuracion",
         "pistas": [
-            "El texto extraño es Base64, una codificación muy usada en la web. Buscá \"decodificar base64 online\".",
-            "Copiá el texto y pegalo en base64decode.org",
-            "El texto decodificado dice: robots.txt",
+            "El texto esta codificado en Base64, un formato muy usado en la web. Copia el texto y pegalo en el decodificador de abajo.",
+            "El simbolo <code>=</code> al final es tipico de Base64. Proba decodificarlo y fijate que palabra aparece.",
+            "La respuesta es: <strong>configuracion</strong>",
         ],
     },
     3: {
         "titulo": "El archivo secreto",
-        "descripcion": "Sabés que existe un archivo oculto en el servidor. ¿Podés encontrarlo?",
+        "descripcion": "Sabes que existe un archivo de configuracion oculto en el servidor. ¿Podes encontrarlo?",
         "respuesta": "cortafuegos",
         "pistas": [
-            "robots.txt es un archivo que los sitios web usan para dar instrucciones a buscadores. Probá acceder a /ctf/robots.txt",
-            "Abrí el navegador y andá a: http://localhost:5000/ctf/robots.txt",
-            "El archivo contiene la palabra: cortafuegos",
+            "El paso anterior te dio una palabra clave... ¿que pasa si intentas acceder a ese archivo en el navegador?",
+            "Proba navegar a: <code>localhost:5000/ctf/configuracion</code>",
+            "La respuesta es: <strong>cortafuegos</strong>",
         ],
     },
     4: {
         "titulo": "La flag final",
-        "descripcion": "Ya tenés todas las piezas. En ciberseguridad, las respuestas se entregan como \"flags\" con un formato especial.",
-        "respuesta": "CTF{cortafuegos}",
+        "descripcion": "El sistema tiene una contrasena hardcodeada en el codigo fuente de esta pagina. Los desarrolladores a veces dejan credenciales expuestas. Encontrala.",
+        "respuesta": "CTF{seguridad_total}",
         "pistas": [
-            "El formato de flag es: CTF{palabra}",
-            "¿Cuál fue la última palabra que encontraste?",
-            "La flag es: CTF{cortafuegos}",
+            "¿Recordas como encontraste la respuesta del paso 1? Esta pagina tambien esconde algo en su codigo fuente...",
+            "Abri el codigo fuente de ESTA pagina (Ctrl+U) y busca un comentario o variable con la flag.",
+            "La respuesta es: <strong>CTF{seguridad_total}</strong>",
         ],
     },
 }
@@ -140,7 +141,7 @@ def verificar(num):
             num=num,
             completados=completados,
             total=len(PASOS),
-            error="Respuesta incorrecta. ¡Seguí intentando!",
+            error="Respuesta incorrecta. ¡Segui intentando!",
         )
 
 
@@ -156,16 +157,7 @@ def completado():
     )
 
 
-# ── Archivo oculto para el paso 3 ──
-@ctf_bp.route("/robots.txt")
-def robots():
-    return (
-        "# CyberQuest - Archivo de configuración\n"
-        "# Los robots de búsqueda no deberían indexar esto...\n"
-        "#\n"
-        "# Pero si llegaste hasta acá, ¡bien hecho!\n"
-        "# CLAVE-PASO-3: cortafuegos\n"
-        "#\n"
-        "User-agent: *\n"
-        "Disallow: /ctf/secreto/\n"
-    ), 200, {"Content-Type": "text/plain; charset=utf-8"}
+# ── Archivo de configuración oculto para el paso 3 ──
+@ctf_bp.route("/configuracion")
+def configuracion():
+    return render_template("ctf_config.html")

@@ -12,7 +12,7 @@
             <div class="cq-logo">CQ</div>
             <div>
                 <h1>CyberQuest</h1>
-                <div class="cq-subtitle">Desafío de ciberseguridad</div>
+                <div class="cq-subtitle">Desafio de ciberseguridad</div>
             </div>
         </div>
     </header>
@@ -37,7 +37,7 @@
 
         {% if exito %}
         <div class="msg-success">
-            🎉 ¡Excelente! Decodificaste el mensaje Base64. Esta codificación se usa mucho en la web para transmitir datos.
+            🎉 ¡Excelente! Decodificaste el mensaje Base64. Esta codificacion se usa mucho en la web para transmitir datos de forma que no contengan caracteres especiales.
         </div>
         <a href="{{ url_for('ctf.paso', num=siguiente) }}" class="btn-next">Ir al paso {{ siguiente }} →</a>
         {% else %}
@@ -48,20 +48,35 @@
 
         <div class="challenge-area">
             <h3>Mensaje interceptado</h3>
-            <p style="color: #8b949e; margin-bottom: 12px;">Interceptamos esta comunicación sospechosa. El mensaje parece estar codificado en un formato muy común en la web...</p>
-            <div class="challenge-content">cm9ib3RzLnR4dA==</div>
-            <p style="color: #8b949e; font-size: 0.82rem;">¿Podés descifrar qué dice este mensaje?</p>
+            <p style="color: #8b949e; margin-bottom: 12px;">Interceptamos esta comunicacion sospechosa. El mensaje parece estar codificado en un formato muy comun en la web...</p>
+            <div class="challenge-content">Y29uZmlndXJhY2lvbg==</div>
+            <p style="color: #8b949e; font-size: 0.82rem;">¿Podes descifrar que dice este mensaje? Usa el decodificador de abajo.</p>
+
+            <div class="decoder-panel">
+                <h4>🔧 Decodificador Base64</h4>
+                <div class="decoder-row">
+                    <div class="decoder-field">
+                        <label>Texto codificado</label>
+                        <textarea id="encodedInput" rows="2" placeholder="Pega el texto codificado aca..."></textarea>
+                    </div>
+                    <button type="button" class="decoder-btn" onclick="decodeBase64()">Decodificar →</button>
+                    <div class="decoder-field">
+                        <label>Resultado</label>
+                        <div id="decodedOutput" class="decoder-output">...</div>
+                    </div>
+                </div>
+            </div>
 
             <form method="POST" action="{{ url_for('ctf.verificar', num=2) }}">
                 <div class="answer-form">
-                    <input type="text" name="respuesta" class="answer-input" placeholder="¿Qué dice el mensaje?" required autofocus>
+                    <input type="text" name="respuesta" class="answer-input" placeholder="¿Que dice el mensaje?" required autofocus>
                     <button type="submit" class="btn-submit">Verificar</button>
                 </div>
             </form>
         </div>
 
         <div class="hints-section">
-            <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitás ayuda?</h3>
+            <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitas ayuda?</h3>
             {% for pista in paso.pistas %}
             <button class="hint-btn" onclick="toggleHint(this, 'hint-{{ loop.index }}')">
                 <span class="hint-icon">💡</span> Pista {{ loop.index }}
@@ -87,6 +102,24 @@
         } else {
             hint.style.display = 'none';
             btn.classList.remove('hint-btn--revealed');
+        }
+    }
+
+    function decodeBase64() {
+        var input = document.getElementById('encodedInput').value.trim();
+        var output = document.getElementById('decodedOutput');
+        if (!input) {
+            output.textContent = '...';
+            output.className = 'decoder-output';
+            return;
+        }
+        try {
+            var decoded = atob(input);
+            output.textContent = decoded;
+            output.className = 'decoder-output decoder-output--success';
+        } catch (e) {
+            output.textContent = 'Error: texto no valido';
+            output.className = 'decoder-output decoder-output--error';
         }
     }
     </script>
