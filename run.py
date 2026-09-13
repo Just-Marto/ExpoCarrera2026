@@ -1,14 +1,25 @@
 """
 Punto de entrada principal para la expo de ciberseguridad.
-Levanta el servidor Flask con ambos módulos (login + CTF).
+Levanta Flask con los módulos de login y CTF en localhost:5000.
 """
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(__file__))
+
 from flask import Flask
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "<h1>Expo Ciberseguridad 2026</h1><p>Servidor funcionando.</p>"
+    from login_vulnerable.db import init_db
+    from login_vulnerable.routes import login_bp
+
+    init_db()
+    app.register_blueprint(login_bp)
+
+    return app
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True, host="127.0.0.1", port=5000)
