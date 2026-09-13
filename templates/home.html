@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expo Ciberseguridad 2026</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Expo Ingeniería en Sistemas 2026</div>
+            <h1>Ciberseguridad<br><span class="accent">en acción</span></h1>
+            <p class="hero-desc">Dos desafíos interactivos para aprender sobre seguridad informática. ¿Te animás?</p>
+        </div>
+    </div>
+
+    <div class="modules">
+        <a href="/login" class="module-card module-card--login">
+            <div class="module-icon">🔓</div>
+            <div class="module-tag">Estación 1</div>
+            <h2>¿Podés entrar sin la contraseña?</h2>
+            <p>Intentá hackear el login de un campus virtual usando SQL injection. Después, aprendé cómo se previene.</p>
+            <div class="module-time">~2 minutos</div>
+            <div class="module-cta">Empezar →</div>
+        </a>
+
+        <a href="/ctf/" class="module-card module-card--ctf">
+            <div class="module-icon">🏆</div>
+            <div class="module-tag">Estación 2</div>
+            <h2>CyberQuest: Capturá la flag</h2>
+            <p>4 desafíos encadenados: código fuente, Base64, archivos ocultos. ¿Podés resolver los 4?</p>
+            <div class="module-time">~5 minutos</div>
+            <div class="module-cta">Empezar →</div>
+        </a>
+    </div>
+
+    <footer class="home-footer">
+        <p>Proyecto educativo — Todo corre en localhost, nada expuesto a internet.</p>
+    </footer>
+</body>
+</html>

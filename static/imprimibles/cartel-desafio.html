@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cartel — Desafío SQL Injection</title>
+    <style>
+        @page { size: A4 landscape; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: white;
+            width: 297mm;
+            height: 210mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20mm;
+        }
+        .icon { font-size: 80px; margin-bottom: 15mm; }
+        h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 10mm;
+        }
+        .accent { color: #00d4aa; }
+        .subtitle {
+            font-size: 22px;
+            color: #8b949e;
+            margin-bottom: 15mm;
+            max-width: 600px;
+        }
+        .hint-box {
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            padding: 12px 30px;
+            font-family: 'Consolas', monospace;
+            font-size: 28px;
+            color: #f0ad4e;
+            margin-bottom: 12mm;
+        }
+        .hint-label {
+            font-size: 14px;
+            color: #484f58;
+            margin-bottom: 4mm;
+        }
+        .url {
+            font-size: 20px;
+            color: #4a90d9;
+            font-family: 'Consolas', monospace;
+        }
+        .footer-text {
+            position: absolute;
+            bottom: 10mm;
+            font-size: 12px;
+            color: #484f58;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon">🔓</div>
+    <h1>¿Podés entrar<br><span class="accent">sin la contraseña?</span></h1>
+    <p class="subtitle">Intentá hackear el login de un campus virtual.<br>Después, aprendé cómo se previene.</p>
+    <div class="hint-label">PISTA: probá escribir esto en el campo de usuario...</div>
+    <div class="hint-box">' OR '1'='1</div>
+    <div class="url">localhost:5000/login</div>
+    <div class="footer-text">Expo Ciberseguridad — Ingeniería en Sistemas 2026</div>
+</body>
+</html>

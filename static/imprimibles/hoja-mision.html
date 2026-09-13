@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoja de Misión — CyberQuest</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #222;
+            max-width: 180mm;
+            margin: 0 auto;
+            padding: 10mm;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #0d1117;
+            padding-bottom: 5mm;
+            margin-bottom: 6mm;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #0d1117;
+        }
+        .header .subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-top: 2mm;
+        }
+        .classified {
+            display: inline-block;
+            background: #c33;
+            color: white;
+            padding: 2px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            border-radius: 3px;
+            margin-bottom: 3mm;
+        }
+        .briefing {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 4mm;
+            margin-bottom: 6mm;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .briefing strong { color: #0d1117; }
+        h2 {
+            font-size: 16px;
+            color: #0d1117;
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px solid #ddd;
+        }
+        .step {
+            display: flex;
+            gap: 4mm;
+            margin-bottom: 5mm;
+            align-items: flex-start;
+        }
+        .step-num {
+            width: 8mm;
+            height: 8mm;
+            background: #0d1117;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-body h3 {
+            font-size: 14px;
+            color: #0d1117;
+            margin-bottom: 1mm;
+        }
+        .step-body p {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .answer-line {
+            border-bottom: 1px dashed #999;
+            height: 8mm;
+            margin: 2mm 0 0 12mm;
+        }
+        .answer-label {
+            font-size: 10px;
+            color: #999;
+            margin-left: 12mm;
+        }
+        .rules {
+            margin-top: 6mm;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .rules li { margin-bottom: 2mm; }
+        .flag-box {
+            margin-top: 6mm;
+            border: 2px dashed #0d1117;
+            border-radius: 8px;
+            padding: 5mm;
+            text-align: center;
+        }
+        .flag-box p { font-size: 12px; color: #666; margin-bottom: 3mm; }
+        .flag-line {
+            font-size: 20px;
+            font-family: 'Consolas', monospace;
+            color: #0d1117;
+            letter-spacing: 1px;
+        }
+        .flag-blank {
+            display: inline-block;
+            border-bottom: 2px solid #0d1117;
+            width: 40mm;
+            margin: 0 2mm;
+        }
+        .url-box {
+            margin-top: 6mm;
+            text-align: center;
+            font-size: 14px;
+            color: #0d1117;
+            font-family: 'Consolas', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="classified">CONFIDENCIAL</div>
+        <h1>🕵️ Hoja de Misión</h1>
+        <div class="subtitle">CyberQuest — Expo Ciberseguridad 2026</div>
+    </div>
+
+    <div class="briefing">
+        <strong>Agente:</strong> tu misión es completar 4 desafíos de ciberseguridad encadenados. Cada paso te da la pista para el siguiente. Usá las herramientas del navegador, tu ingenio, y — si te trabás — pedí una pista al presentador. <strong>¡Buena suerte!</strong>
+    </div>
+
+    <h2>Los 4 pasos</h2>
+
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <h3>El código oculto</h3>
+            <p>Una página web esconde algo que no se ve a simple vista. ¿Dónde miran los hackers que los usuarios comunes no?</p>
+        </div>
+    </div>
+    <div class="answer-label">Tu respuesta:</div>
+    <div class="answer-line"></div>
+
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+            <h3>El mensaje cifrado</h3>
+            <p>Interceptaste un mensaje codificado. Es un formato muy común en la web... ¿Podés descifrarlo?</p>
+        </div>
+    </div>
+    <div class="answer-label">Tu respuesta:</div>
+    <div class="answer-line"></div>
+
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+            <h3>El archivo secreto</h3>
+            <p>Descubriste el nombre de un archivo oculto en el servidor. Encontralo y leé su contenido.</p>
+        </div>
+    </div>
+    <div class="answer-label">Tu respuesta:</div>
+    <div class="answer-line"></div>
+
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+            <h3>La flag final</h3>
+            <p>Armá la flag con el formato especial de competencias de ciberseguridad.</p>
+        </div>
+    </div>
+
+    <div class="flag-box">
+        <p>Escribí tu flag final acá:</p>
+        <div class="flag-line">CTF{ <span class="flag-blank"></span> }</div>
+    </div>
+
+    <ul class="rules">
+        <li>💡 Si te trabás, hay <strong>3 pistas</strong> por paso en la pantalla. ¡No da vergüenza usarlas!</li>
+        <li>⏱️ Tiempo estimado: ~5 minutos</li>
+        <li>🏆 Completá los 4 pasos y anotá tu nombre en el ranking</li>
+    </ul>
+
+    <div class="url-box">localhost:5000/ctf</div>
+</body>
+</html>

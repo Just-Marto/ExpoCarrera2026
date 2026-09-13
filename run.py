@@ -7,7 +7,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from flask import Flask
+from flask import Flask, render_template
 
 def create_app():
     app = Flask(__name__)
@@ -20,6 +20,10 @@ def create_app():
     init_db()
     app.register_blueprint(login_bp)
     app.register_blueprint(ctf_bp)
+
+    @app.route("/")
+    def home():
+        return render_template("home.html")
 
     return app
 

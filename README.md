@@ -35,8 +35,21 @@ python run.py
 
 | URL | Descripción |
 |-----|-------------|
+| `http://localhost:5000/` | Página de inicio (selector de módulos) |
 | `http://localhost:5000/login` | Login vulnerable (demo principal) |
 | `http://localhost:5000/login-seguro` | Login seguro (para comparar) |
+| `http://localhost:5000/ctf/` | CyberQuest — CTF de 4 pasos |
+| `http://localhost:5000/ctf/completado` | Pantalla de victoria del CTF |
+
+### Material imprimible
+
+| Archivo | Descripción |
+|---------|-------------|
+| `static/imprimibles/cartel-desafio.html` | Cartel A4 apaisado para la mesa del login |
+| `static/imprimibles/hoja-mision.html` | Hoja de misión A4 para visitantes del CTF |
+| `static/imprimibles/ranking.html` | Tabla de ranking A4 para anotar tiempos |
+
+Abrir en el navegador e imprimir con Ctrl+P.
 
 ### Credenciales de prueba
 
@@ -67,7 +80,12 @@ Escribir en cualquiera de los campos del login vulnerable:
 │   ├── routes.py           # Rutas Flask (vulnerable + segura)
 │   └── templates/          # HTMLs del login
 ├── ctf/                     # Módulo 2: Mini-CTF de 4 pasos
-├── static/css/              # Estilos
+│   ├── routes.py           # Rutas Flask del CTF
+│   └── templates/          # HTMLs de cada paso + dashboard
+├── templates/home.html      # Página de inicio (selector de módulos)
+├── static/css/              # Estilos (login, ctf, home)
+├── static/imprimibles/      # Cartel, hoja de misión, ranking (A4)
+├── SOLUCIONES.md            # Respuestas del CTF (solo presentador)
 ├── iniciar.bat              # Arranque con un solo comando (Windows)
 ├── run.py                   # Punto de entrada Flask
 ├── requirements.txt         # Dependencias (Flask)

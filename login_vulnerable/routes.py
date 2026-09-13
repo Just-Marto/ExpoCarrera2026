@@ -14,11 +14,6 @@ login_bp = Blueprint(
 )
 
 
-@login_bp.route("/")
-def index():
-    return redirect(url_for("login.login_page"))
-
-
 @login_bp.route("/login")
 def login_page():
     return render_template("login.html")
