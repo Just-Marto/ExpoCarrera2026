@@ -22,14 +22,12 @@
             <div class="login-container">
                 <div class="login-title">Iniciar sesion en su cuenta</div>
 
-                {% if error %}
-                <div class="error-msg">{{ error }}</div>
-                {% endif %}
+                <div class="error-msg" id="errorBanner" {% if not error %}style="display: none;"{% endif %}>{{ error or '' }}</div>
 
                 <form method="POST" action="{{ url_for('login.login_submit') }}">
                     <div class="form-group">
                         <label for="username">Nombre de usuario</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username" value="{{ username or '' }}" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Contrasena</label>
@@ -105,14 +103,23 @@
         async function simularFuerzaBruta() {
             var btn = document.getElementById('bruteforceBtn');
             var log = document.getElementById('bruteforceLog');
+            var banner = document.getElementById('errorBanner');
             var form = document.querySelector('.login-container form');
             var userField = document.getElementById('username');
             var passField = document.getElementById('password');
+            var passToggle = document.getElementById('passwordToggle');
 
             btn.disabled = true;
             log.innerHTML = '';
             log.style.display = 'block';
+            // El usuario nunca se borra: se completa una vez y queda fijo
+            // durante toda la simulacion, igual que en un intento real.
             userField.value = 'admin';
+            // Mostrar la contrasena en texto plano mientras se simula el
+            // ataque, para que se vea cada intento en vivo.
+            passField.type = 'text';
+            passToggle.textContent = '🙈';
+            passToggle.setAttribute('aria-label', 'Ocultar contrasena');
 
             for (var i = 0; i < wordlist.length; i++) {
                 var pass = wordlist[i];
@@ -120,9 +127,11 @@
 
                 passField.value = pass;
                 btn.textContent = '⏳ Probando: admin / ' + pass;
+                banner.style.display = 'none';
                 await esperar(450);
 
                 if (esUltima) {
+                    banner.style.display = 'none';
                     var lineaOk = document.createElement('div');
                     lineaOk.className = 'bf-attempt bf-attempt--ok';
                     lineaOk.innerHTML = '<span class="bf-cred">admin : ' + pass + '</span><span class="bf-result">✅ correcto</span>';
@@ -139,12 +148,20 @@
                 var html = await resp.text();
                 var incorrecto = html.indexOf('incorrectos') !== -1;
 
+                // Igual que en un intento real: se muestra el mismo cartel
+                // de error arriba del formulario, y el usuario no se borra.
+                banner.textContent = 'Usuario o contraseña incorrectos';
+                banner.style.display = 'block';
+                userField.value = 'admin';
+
                 var linea = document.createElement('div');
                 linea.className = 'bf-attempt';
                 linea.innerHTML =
                     '<span class="bf-cred">admin : ' + pass + '</span>' +
                     '<span class="bf-result">' + (incorrecto ? '❌ Usuario o contraseña incorrectos' : '❌ incorrecto') + '</span>';
                 log.appendChild(linea);
+
+                await esperar(400);
             }
         }
     </script>
