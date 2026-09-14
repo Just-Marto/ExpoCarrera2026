@@ -15,53 +15,60 @@
         </div>
     </header>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="main-content">
-        <div class="login-container">
-            <div class="login-title">Iniciar sesion en su cuenta</div>
+        <div class="login-wrapper">
+            <div class="login-container">
+                <div class="login-title">Iniciar sesion en su cuenta</div>
 
-            {% if error %}
-            <div class="error-msg">{{ error }}</div>
-            {% endif %}
+                {% if error %}
+                <div class="error-msg">{{ error }}</div>
+                {% endif %}
 
-            <form method="POST" action="{{ url_for('login.login_submit') }}">
-                <div class="form-group">
-                    <label for="username">Nombre de usuario</label>
-                    <input type="text" id="username" name="username" required>
+                <form method="POST" action="{{ url_for('login.login_submit') }}">
+                    <div class="form-group">
+                        <label for="username">Nombre de usuario</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contrasena</label>
+                        <div class="password-field">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="password-toggle" id="passwordToggle" onclick="togglePassword()" aria-label="Mostrar contrasena">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Acceder</button>
+                </form>
+
+                <div class="login-help">
+                    ¿Olvido su nombre de usuario o contrasena?
                 </div>
-                <div class="form-group">
-                    <label for="password">Contrasena</label>
-                    <input type="password" id="password" name="password" required>
+
+                <div class="hint-trigger" onclick="toggleHints()">
+                    <span class="hint-bulb">💡</span>
+                    <span class="hint-trigger-text">¿Primera vez hackeando algo? Te ayudamos 🙂</span>
                 </div>
-                <button type="submit" class="btn">Acceder</button>
-            </form>
 
-            <div class="login-help">
-                ¿Olvido su nombre de usuario o contrasena?
-            </div>
+                <div class="bruteforce-panel">
+                    <button type="button" class="btn-bruteforce" id="bruteforceBtn" onclick="simularFuerzaBruta()">
+                        🔨 Simular ataque de fuerza bruta
+                    </button>
+                    <div class="bruteforce-log" id="bruteforceLog"></div>
+                </div>
 
-            <div class="hint-trigger" onclick="toggleHints()">
-                <span class="hint-bulb">💡</span>
-                <span class="hint-trigger-text">¿No sabes por donde empezar?</span>
+                <div style="text-align: center; margin-top: 16px;">
+                    <a href="/" class="btn-secondary">Volver al inicio</a>
+                </div>
             </div>
 
             <div class="hint-panel" id="hintPanel">
-                <div class="hint-item" id="hint1">
-                    <div class="hint-header" onclick="revealHint(1)">
-                        <span class="hint-bulb-small">💡</span> Pista 1
-                    </div>
-                    <div class="hint-body" id="hintBody1">
-                        Este login tiene un problema: lo que escribis se mete directo en una consulta a la base de datos. ¿Que pasa si en vez de un nombre de usuario escribis algo que la base de datos interprete como codigo?
-                    </div>
+                <div class="hint-panel-title">💡 Ayuda</div>
+                <div class="hint-body hint-body--open">
+                    Este login no tiene ningun limite de intentos. El usuario <code>admin</code> existe... y su contrasena es una de las mas usadas del mundo. Un atacante puede probar una lista de contrasenas comunes, una por una, hasta acertar.
                 </div>
-                <div class="hint-item" id="hint2" style="display: none;">
-                    <div class="hint-header" onclick="revealHint(2)">
-                        <span class="hint-bulb-small">💡</span> Pista 2 — La respuesta
-                    </div>
-                    <div class="hint-body" id="hintBody2">
-                        Escribi esto en el campo de usuario (o contrasena):<br>
-                        <code class="hint-code">' OR '1'='1</code><br>
-                        <span class="hint-why">La comilla <code>'</code> cierra el texto que espera la base de datos, y <code>OR '1'='1'</code> hace que la condicion siempre sea verdadera. Resultado: entras sin contrasena.</span>
-                    </div>
+                <div class="hint-body hint-body--open">
+                    Usa el boton de abajo para ver, en vivo, como una herramienta de fuerza bruta prueba una wordlist de contrasenas contra el usuario <code>admin</code> — igual que herramientas como <em>gobuster</em> o <em>dirb</em> prueban miles de rutas hasta encontrar un directorio que exista, pero aca contra un login.
                 </div>
             </div>
         </div>
@@ -72,8 +79,16 @@
     </footer>
 
     <script>
+        function togglePassword() {
+            var field = document.getElementById('password');
+            var btn = document.getElementById('passwordToggle');
+            var visible = field.type === 'text';
+            field.type = visible ? 'password' : 'text';
+            btn.textContent = visible ? '👁️' : '🙈';
+            btn.setAttribute('aria-label', visible ? 'Mostrar contrasena' : 'Ocultar contrasena');
+        }
+
         var hintsOpen = false;
-        var hint1Revealed = false;
 
         function toggleHints() {
             var panel = document.getElementById('hintPanel');
@@ -81,13 +96,55 @@
             panel.style.display = hintsOpen ? 'block' : 'none';
         }
 
-        function revealHint(num) {
-            var body = document.getElementById('hintBody' + num);
-            if (body.style.display === 'block') return;
-            body.style.display = 'block';
-            if (num === 1) {
-                hint1Revealed = true;
-                document.getElementById('hint2').style.display = 'block';
+        var wordlist = {{ intentos_wordlist|tojson }};
+
+        function esperar(ms) {
+            return new Promise(function (resolve) { setTimeout(resolve, ms); });
+        }
+
+        async function simularFuerzaBruta() {
+            var btn = document.getElementById('bruteforceBtn');
+            var log = document.getElementById('bruteforceLog');
+            var form = document.querySelector('.login-container form');
+            var userField = document.getElementById('username');
+            var passField = document.getElementById('password');
+
+            btn.disabled = true;
+            log.innerHTML = '';
+            log.style.display = 'block';
+            userField.value = 'admin';
+
+            for (var i = 0; i < wordlist.length; i++) {
+                var pass = wordlist[i];
+                var esUltima = i === wordlist.length - 1;
+
+                passField.value = pass;
+                btn.textContent = '⏳ Probando: admin / ' + pass;
+                await esperar(450);
+
+                if (esUltima) {
+                    var lineaOk = document.createElement('div');
+                    lineaOk.className = 'bf-attempt bf-attempt--ok';
+                    lineaOk.innerHTML = '<span class="bf-cred">admin : ' + pass + '</span><span class="bf-result">✅ correcto</span>';
+                    log.appendChild(lineaOk);
+                    btn.textContent = '✅ Contrasena encontrada: admin / ' + pass + ' — presiona "Acceder"';
+                    return;
+                }
+
+                var resp = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'username=admin&password=' + encodeURIComponent(pass)
+                });
+                var html = await resp.text();
+                var incorrecto = html.indexOf('incorrectos') !== -1;
+
+                var linea = document.createElement('div');
+                linea.className = 'bf-attempt';
+                linea.innerHTML =
+                    '<span class="bf-cred">admin : ' + pass + '</span>' +
+                    '<span class="bf-result">' + (incorrecto ? '❌ Usuario o contraseña incorrectos' : '❌ incorrecto') + '</span>';
+                log.appendChild(linea);
             }
         }
     </script>

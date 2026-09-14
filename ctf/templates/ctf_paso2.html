@@ -27,6 +27,8 @@
         </div>
     </div>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="paso-container">
         <div class="paso-header">
             <a href="{{ url_for('ctf.dashboard') }}" class="back-link">← Volver al panel</a>
@@ -50,21 +52,10 @@
             <h3>Mensaje interceptado</h3>
             <p style="color: #8b949e; margin-bottom: 12px;">Interceptamos esta comunicacion sospechosa. El mensaje parece estar codificado en un formato muy comun en la web...</p>
             <div class="challenge-content">Y29uZmlndXJhY2lvbg==</div>
-            <p style="color: #8b949e; font-size: 0.82rem;">¿Podes descifrar que dice este mensaje? Usa el decodificador de abajo.</p>
+            <p style="color: #8b949e; font-size: 0.82rem;">¿Podes descifrar que dice este mensaje? Vas a necesitar un decodificador Base64.</p>
 
-            <div class="decoder-panel">
-                <h4>🔧 Decodificador Base64</h4>
-                <div class="decoder-row">
-                    <div class="decoder-field">
-                        <label>Texto codificado</label>
-                        <textarea id="encodedInput" rows="2" placeholder="Pega el texto codificado aca..."></textarea>
-                    </div>
-                    <button type="button" class="decoder-btn" onclick="decodeBase64()">Decodificar →</button>
-                    <div class="decoder-field">
-                        <label>Resultado</label>
-                        <div id="decodedOutput" class="decoder-output">...</div>
-                    </div>
-                </div>
+            <div style="text-align: center; margin: 16px 0;">
+                <a href="https://www.base64decode.org/es/" target="_blank" rel="noopener noreferrer" class="btn-submit" style="display: inline-block; text-decoration: none;">🔧 Abrir decodificador Base64 →</a>
             </div>
 
             <form method="POST" action="{{ url_for('ctf.verificar', num=2) }}">
@@ -105,23 +96,6 @@
         }
     }
 
-    function decodeBase64() {
-        var input = document.getElementById('encodedInput').value.trim();
-        var output = document.getElementById('decodedOutput');
-        if (!input) {
-            output.textContent = '...';
-            output.className = 'decoder-output';
-            return;
-        }
-        try {
-            var decoded = atob(input);
-            output.textContent = decoded;
-            output.className = 'decoder-output decoder-output--success';
-        } catch (e) {
-            output.textContent = 'Error: texto no valido';
-            output.className = 'decoder-output decoder-output--error';
-        }
-    }
     </script>
 </body>
 </html>

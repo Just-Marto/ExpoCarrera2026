@@ -15,6 +15,8 @@
         </div>
     </header>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="main-content">
         <div class="login-container">
             <div class="secure-badge">✅ Versión corregida</div>
@@ -27,21 +29,24 @@
             <form method="POST" action="{{ url_for('login.login_seguro_submit') }}">
                 <div class="form-group">
                     <label for="username">Nombre de usuario</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" required {% if bloqueado %}disabled{% endif %}>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" required {% if bloqueado %}disabled{% endif %}>
+                        <button type="button" class="password-toggle" id="passwordToggle" onclick="togglePassword()" aria-label="Mostrar contraseña">👁️</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn--secure">Acceder</button>
+                <button type="submit" class="btn btn--secure" {% if bloqueado %}disabled{% endif %}>Acceder</button>
             </form>
 
             <div class="login-help">
-                Probá <code>' OR '1'='1</code> — acá no funciona.
+                Probá <code>admin / admin</code> varias veces seguidas — despues de 3 intentos fallidos, se bloquea.
             </div>
 
             <div class="secure-explanation">
-                <p><strong>¿Por qué no funciona?</strong> Esta versión usa consultas parametrizadas: los datos del usuario se envían separados del SQL, así la base de datos nunca los confunde con instrucciones.</p>
+                <p><strong>¿Por qué no funciona la fuerza bruta acá?</strong> Esta versión cuenta los intentos fallidos y bloquea la cuenta temporalmente al llegar al limite. Un atacante ya no puede probar una wordlist entera sin ser frenado.</p>
             </div>
 
             <div style="text-align: center; margin-top: 16px;">
@@ -53,5 +58,16 @@
     <footer class="site-footer">
         UniDemo Campus Virtual — Plataforma educativa de demostración
     </footer>
+
+    <script>
+        function togglePassword() {
+            var field = document.getElementById('password');
+            var btn = document.getElementById('passwordToggle');
+            var visible = field.type === 'text';
+            field.type = visible ? 'password' : 'text';
+            btn.textContent = visible ? '👁️' : '🙈';
+            btn.setAttribute('aria-label', visible ? 'Mostrar contraseña' : 'Ocultar contraseña');
+        }
+    </script>
 </body>
 </html>

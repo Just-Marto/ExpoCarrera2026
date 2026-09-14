@@ -27,11 +27,13 @@
         </div>
     </div>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="cq-main">
         <div class="completion">
             <div class="completion-icon">🏆</div>
             <h1>¡Felicitaciones!</h1>
-            <p>Completaste los 4 desafios de CyberQuest. En el camino descubriste informacion oculta en codigo fuente, decodificaste mensajes en Base64, encontraste archivos de configuracion expuestos, y detectaste credenciales hardcodeadas.</p>
+            <p>Completaste los 4 desafios de CyberQuest. En el camino descubriste informacion oculta en codigo fuente, decodificaste mensajes en Base64, encontraste archivos de configuracion expuestos, y vulneraste el login real por fuerza bruta.</p>
 
             <div class="flag-display">CTF{seguridad_total}</div>
 
@@ -41,7 +43,7 @@
                     <li><strong>Paso 1:</strong> Los comentarios en el codigo fuente pueden filtrar informacion sensible</li>
                     <li><strong>Paso 2:</strong> Base64 no es encriptacion — cualquiera puede decodificarlo</li>
                     <li><strong>Paso 3:</strong> Archivos de configuracion expuestos revelan datos internos del sistema</li>
-                    <li><strong>Paso 4:</strong> Credenciales hardcodeadas en el codigo son un error critico de seguridad</li>
+                    <li><strong>Paso 4:</strong> Un login sin limite de intentos y contrasenas debiles se rompen por fuerza bruta</li>
                 </ul>
             </div>
 
@@ -52,7 +54,6 @@
 
             <div class="completion-actions">
                 <a href="{{ url_for('ctf.reset') }}" class="btn-next">Reiniciar y jugar de nuevo</a>
-                <a href="/" class="btn-outline">Volver al inicio</a>
             </div>
         </div>
     </div>

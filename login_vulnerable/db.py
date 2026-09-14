@@ -25,7 +25,7 @@ def init_db():
     """)
 
     usuarios_ejemplo = [
-        ("admin", "admin123"),
+        ("admin", "admin"),
         ("maria", "clave456"),
         ("juan", "segura789"),
     ]

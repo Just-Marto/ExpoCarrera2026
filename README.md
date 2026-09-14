@@ -6,9 +6,7 @@
 
 Estación interactiva para una expo universitaria que demuestra conceptos de ciberseguridad de forma práctica:
 
-1. **Login Vulnerable (SQL Injection)** — Un campus virtual ficticio ("UniDemo") con una vulnerabilidad real de SQL injection. El visitante intenta "hackear" el login, ve una explicación paso a paso de qué pasó y por qué, y luego compara con la versión segura.
-
-2. **Mini-CTF** — Desafío de 4 pasos encadenados (pistas en código fuente, Base64, archivos ocultos) que el visitante resuelve en ~5 minutos.
+**Mini-CTF (CyberQuest)** — Desafío de 4 pasos encadenados que el visitante resuelve en ~5 minutos: pistas en código fuente, Base64 y archivos ocultos (pasos 1-3), y como cierre (paso 4) el login real de un campus virtual ficticio ("UniDemo") con un login sin límite de intentos y una contraseña débil. El visitante simula un ataque de fuerza bruta contra el usuario `admin`, ve una explicación paso a paso de qué pasó y por qué, y luego compara con la versión segura (con bloqueo de cuenta).
 
 ## Inicio rápido (un solo comando)
 
@@ -35,11 +33,11 @@ python run.py
 
 | URL | Descripción |
 |-----|-------------|
-| `http://localhost:5000/` | Página de inicio (selector de módulos) |
-| `http://localhost:5000/login` | Login vulnerable (demo principal) |
+| `http://localhost:5000/` | Página de inicio |
+| `http://localhost:5000/ctf/` | CyberQuest — CTF de 4 pasos (empieza acá) |
+| `http://localhost:5000/login` | Login vulnerable — paso 4 del CTF (se desbloquea al completar pasos 1-3) |
 | `http://localhost:5000/login-seguro` | Login seguro (para comparar) |
-| `http://localhost:5000/ctf/` | CyberQuest — CTF de 4 pasos |
-| `http://localhost:5000/ctf/completado` | Pantalla de victoria del CTF |
+| `http://localhost:5000/ctf/completado` | Pantalla de victoria — se llega ahí al entrar al login como admin |
 
 ### Material imprimible
 
@@ -55,16 +53,13 @@ Abrir en el navegador e imprimir con Ctrl+P.
 
 | Usuario | Contraseña |
 |---------|------------|
-| admin | admin123 |
+| admin | admin |
 | maria | clave456 |
 | juan | segura789 |
 
-### Payload de SQL injection
+### Ataque de fuerza bruta
 
-Escribir en cualquiera de los campos del login vulnerable:
-```
-' OR '1'='1
-```
+El login vulnerable (paso 4 del CTF, tras completar los pasos 1-3) no tiene límite de intentos. El usuario `admin` tiene una contraseña débil (`admin`). El botón "Simular ataque de fuerza bruta" en la página de login anima una wordlist de prueba (`1234`, `qwerty`, `123456`, `admin`) contra ese usuario hasta encontrarla.
 
 ## Stack
 
@@ -75,14 +70,14 @@ Escribir en cualquiera de los campos del login vulnerable:
 ## Estructura
 
 ```
-├── login_vulnerable/        # Módulo 1: Demo SQL injection
+├── ctf/                     # Módulo 1: Mini-CTF de 4 pasos (empieza acá)
+│   ├── routes.py           # Rutas Flask del CTF
+│   └── templates/          # HTMLs de cada paso + dashboard
+├── login_vulnerable/        # Módulo 2: Demo de fuerza bruta (desafío final)
 │   ├── db.py               # Base de datos SQLite con usuarios
 │   ├── routes.py           # Rutas Flask (vulnerable + segura)
 │   └── templates/          # HTMLs del login
-├── ctf/                     # Módulo 2: Mini-CTF de 4 pasos
-│   ├── routes.py           # Rutas Flask del CTF
-│   └── templates/          # HTMLs de cada paso + dashboard
-├── templates/home.html      # Página de inicio (selector de módulos)
+├── templates/home.html      # Página de inicio
 ├── static/css/              # Estilos (login, ctf, home)
 ├── static/imprimibles/      # Cartel, hoja de misión, ranking (A4)
 ├── SOLUCIONES.md            # Respuestas del CTF (solo presentador)

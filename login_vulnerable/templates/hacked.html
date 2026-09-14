@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniDemo — ¡Login bypasseado!</title>
+    <title>UniDemo — ¡Login vulnerado!</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
@@ -15,71 +15,72 @@
         </div>
     </header>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="main-content main-content--top">
         <div class="hacked-container">
             <div class="hacked-banner">
                 <span class="hacked-icon">🔓</span>
                 <h1>¡Acceso no autorizado!</h1>
-                <p>Entraste como <strong>{{ username }}</strong> sin conocer la contrasena.</p>
+                <p>Entraste como <strong>{{ username }}</strong> adivinando la contrasena por fuerza bruta.</p>
             </div>
 
             <div class="explanation">
                 <h2>¿Que acaba de pasar?</h2>
-                <p>Usaste una tecnica llamada <strong>SQL Injection</strong>. En vez de escribir un nombre de usuario real, escribiste un fragmento de codigo SQL que engano a la base de datos.</p>
+                <p>Usaste una tecnica llamada <strong>fuerza bruta</strong>: probar muchas combinaciones de usuario/contrasena de forma automatica hasta que una funciona. Es la misma logica que usan herramientas de <strong>brute-forcing de directorios</strong> (como <em>dirb</em> o <em>gobuster</em>) para encontrar rutas ocultas en un servidor, pero aplicada a un formulario de login.</p>
 
-                <h3>Lo que escribiste:</h3>
+                <h3>Los intentos que se probaron:</h3>
                 <div class="code-block">
-                    <div><span class="label">Usuario:</span> <code>{{ payload_user }}</code></div>
-                    <div><span class="label">Contrasena:</span> <code>{{ payload_pass }}</code></div>
-                </div>
-
-                <h3>La consulta que ejecuto el servidor:</h3>
-                <div class="code-block">
-                    <code>{{ query }}</code>
+                    {% for intento in intentos %}
+                    <div>
+                        <span class="label">admin :</span> <code>{{ intento }}</code>
+                        {% if loop.last %} → <span style="color:#7ee787;">correcto ✅</span>{% else %} → <span style="color:#f28b82;">incorrecto ❌</span>{% endif %}
+                    </div>
+                    {% endfor %}
                 </div>
 
                 <h3>¿Por que funciono?</h3>
                 <div class="step-list">
                     <div class="step">
                         <span class="step-num">1</span>
-                        <p>El programador concateno tu input directo en la consulta SQL, sin limpiarlo.</p>
+                        <p>El usuario <code>admin</code> tiene una contrasena debil y predecible: <code>admin</code>. Esta entre las contrasenas mas usadas del mundo.</p>
                     </div>
                     <div class="step">
                         <span class="step-num">2</span>
-                        <p>Tu comilla <code>'</code> cerro el string que abrio el programador, y lo que sigue se interpreta como codigo SQL.</p>
+                        <p>El sistema no tiene ningun limite de intentos: se puede probar la wordlist completa sin ser bloqueado.</p>
                     </div>
                     <div class="step">
                         <span class="step-num">3</span>
-                        <p><code>OR '1'='1'</code> es una condicion que <strong>siempre es verdadera</strong>, asi que la base devuelve el primer usuario.</p>
+                        <p>Sin bloqueo de cuenta ni CAPTCHA, un script puede probar miles de combinaciones por minuto hasta acertar.</p>
                     </div>
                 </div>
 
                 <h3>¿Como se previene?</h3>
                 <div class="prevention">
-                    <p>Con <strong>consultas parametrizadas</strong>: los datos del usuario viajan separados del comando SQL. Asi la base de datos nunca confunde datos con instrucciones.</p>
+                    <p>Con <strong>limite de intentos y bloqueo de cuenta</strong>: despues de unos pocos intentos fallidos, el sistema bloquea el acceso por un tiempo. Ademas, contrasenas fuertes (largas, unicas, no predecibles) hacen que una wordlist comun no alcance.</p>
                     <div class="code-compare">
                         <div class="code-bad">
-                            <div class="code-label">❌ Vulnerable (concatenacion)</div>
-                            <code>f"SELECT * FROM usuarios WHERE username = '<span class="highlight-bad">{username}</span>'"</code>
+                            <div class="code-label">❌ Vulnerable (sin limite de intentos)</div>
+                            <code>cursor.execute("SELECT * FROM usuarios WHERE username=? AND password=?", (u, p))<br>&nbsp;&nbsp;<span class="highlight-bad"># cualquier cantidad de intentos, sin control</span></code>
                         </div>
                         <div class="code-good">
-                            <div class="code-label">✅ Segura (parametrizada)</div>
-                            <code>cursor.execute("SELECT * FROM usuarios WHERE username = <span class="highlight-good">?</span>", (username,))</code>
+                            <div class="code-label">✅ Segura (con bloqueo de cuenta)</div>
+                            <code>if intentos_fallidos &gt;= <span class="highlight-good">MAX_INTENTOS</span>:<br>&nbsp;&nbsp;bloquear_cuenta()</code>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="infiltration-bridge">
-                <div class="bridge-icon">🕵️</div>
-                <h2>Te infiltraste al sistema</h2>
-                <p>Ahora que estas adentro, hay mas por descubrir. El campus esconde archivos ocultos, mensajes cifrados y una flag secreta. ¿Podes encontrarla?</p>
-                <a href="/ctf/" class="btn-ctf">Explorar el sistema →</a>
+                <div class="bridge-icon">🏆</div>
+                <h2>Completaste todo el recorrido</h2>
+                <p>Resolviste los 4 desafios de CyberQuest — el ultimo era este login. Diste la vuelta completa: encontrar la falla, explotarla y entender como se previene.</p>
+                <a href="{{ url_for('ctf.completado') }}" class="btn-ctf">Ver pantalla final →</a>
             </div>
 
             <div class="hacked-actions">
                 <a href="{{ url_for('login.login_seguro_page') }}" class="btn-secondary">Ver la version segura</a>
-                <a href="{{ url_for('login.login_page') }}" class="btn-secondary">Volver a intentar</a>
+                <a href="/" class="btn-secondary">Volver al inicio</a>
             </div>
         </div>
     </div>

@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="hero">
         <div class="hero-content">
             <div class="hero-badge">Expo Ingenieria en Sistemas 2026</div>
             <h1>Ciberseguridad<br><span class="accent">en accion</span></h1>
-            <p class="hero-desc">Un campus virtual tiene una falla de seguridad. Tu mision: encontrarla, explotarla, infiltrarte al sistema y completar el desafio que hay adentro.</p>
-            <a href="/login" class="hero-cta">Empezar mision</a>
+            <p class="hero-desc">Un campus virtual tiene una falla de seguridad. Tu mision: resolver 4 desafios encadenados, llegar hasta el login y entrar al sistema sin conocer la contrasena.</p>
+            <a href="/ctf/" class="hero-cta">Empezar mision</a>
         </div>
     </div>
 
@@ -20,22 +22,22 @@
         <div class="briefing-card">
             <div class="briefing-icon">1</div>
             <div>
-                <h3>Hackea el login</h3>
-                <p>El campus virtual UniDemo tiene una vulnerabilidad. Encontra como entrar sin la contrasena.</p>
+                <h3>Completa CyberQuest</h3>
+                <p>4 desafios encadenados te esperan: codigo fuente, Base64, archivos ocultos... y el login real como cierre. Encontra la flag.</p>
             </div>
         </div>
         <div class="briefing-card">
             <div class="briefing-icon">2</div>
             <div>
-                <h3>Aprende como se previene</h3>
-                <p>Despues de entrar, vas a ver exactamente que paso y como se protege un sistema real.</p>
+                <h3>Hackea el login</h3>
+                <p>Como desafio final, el campus virtual UniDemo tiene una vulnerabilidad. Encontra como entrar sin conocer la contrasena.</p>
             </div>
         </div>
         <div class="briefing-card">
             <div class="briefing-icon">3</div>
             <div>
-                <h3>Completa CyberQuest</h3>
-                <p>Ya adentro del sistema, 4 desafios encadenados te esperan. Encontra la flag oculta.</p>
+                <h3>Aprende como se previene</h3>
+                <p>Despues de entrar, vas a ver exactamente que paso y como se protege un sistema real.</p>
             </div>
         </div>
     </div>

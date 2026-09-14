@@ -64,6 +64,28 @@
             transition: border-color 0.2s;
         }
         .back-btn:hover { border-color: #00d4aa; color: #00d4aa; }
+        .global-back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            margin: 14px 0 0 24px;
+            border-radius: 50%;
+            border: 1px solid #30363d;
+            background: rgba(22, 27, 34, 0.9);
+            color: #c9d1d9;
+            font-size: 1.3rem;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            transition: background 0.15s, transform 0.15s;
+        }
+        .global-back-btn:hover {
+            background: #21262d;
+            border-color: #8b949e;
+            transform: translateX(-2px);
+        }
         .config-footer {
             background: #161b22;
             border-top: 1px solid #30363d;
@@ -76,6 +98,8 @@
     </style>
 </head>
 <body>
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="config-content">
         <div class="warning-bar">
             ⚠️ Este archivo no deberia ser accesible. Contiene configuracion interna del sistema.

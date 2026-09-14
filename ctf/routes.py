@@ -28,11 +28,11 @@ PASOS = {
     },
     2: {
         "titulo": "El mensaje cifrado",
-        "descripcion": "Interceptaste un mensaje codificado. Usa el decodificador integrado para descifrar que dice.",
+        "descripcion": "Interceptaste un mensaje codificado. Usa un decodificador Base64 para descifrar que dice.",
         "respuesta": "configuracion",
         "pistas": [
-            "El texto esta codificado en Base64, un formato muy usado en la web. Copia el texto y pegalo en el decodificador de abajo.",
-            "El simbolo <code>=</code> al final es tipico de Base64. Proba decodificarlo y fijate que palabra aparece.",
+            "El texto esta codificado en Base64, un formato muy usado en la web.",
+            "Copia el texto y pegalo en <a href=\"https://www.base64decode.org/es/\" target=\"_blank\" rel=\"noopener noreferrer\">base64decode.org/es</a> (el boton de la pagina te lleva ahi).",
             "La respuesta es: <strong>configuracion</strong>",
         ],
     },
@@ -47,16 +47,20 @@ PASOS = {
         ],
     },
     4: {
-        "titulo": "La flag final",
-        "descripcion": "El sistema tiene una contrasena hardcodeada en el codigo fuente de esta pagina. Los desarrolladores a veces dejan credenciales expuestas. Encontrala.",
-        "respuesta": "CTF{seguridad_total}",
+        "titulo": "El login vulnerable",
+        "descripcion": "El ultimo desafio no esta escondido en el codigo: es el login real del campus virtual UniDemo. El usuario admin tiene una contrasena debil y el sistema no bloquea intentos. Entra sin conocerla.",
         "pistas": [
-            "¿Recordas como encontraste la respuesta del paso 1? Esta pagina tambien esconde algo en su codigo fuente...",
-            "Abri el codigo fuente de ESTA pagina (Ctrl+U) y busca un comentario o variable con la flag.",
-            "La respuesta es: <strong>CTF{seguridad_total}</strong>",
+            "Anda al login del campus y fijate si hay alguna herramienta que te ayude a probar contrasenas automaticamente.",
+            "La contrasena de <code>admin</code> es una de las mas usadas del mundo. No hace falta una wordlist gigante.",
+            "En el login, usa el boton <strong>Simular ataque de fuerza bruta</strong>: la contrasena es <strong>admin</strong>.",
         ],
     },
 }
+
+# El paso 4 no se resuelve con un formulario de texto: se completa entrando
+# al login vulnerable (login_vulnerable/routes.py marca este paso al detectar
+# el login exitoso con la credencial debil admin/admin).
+PASO_LOGIN = 4
 
 
 def get_progreso():
@@ -86,7 +90,11 @@ def dashboard():
 
 @ctf_bp.route("/reset")
 def reset():
+    # Limpia todo el progreso: los 4 pasos del CTF (incluido el login,
+    # que es el paso 4) y el contador de intentos del login seguro.
     session.pop("ctf_completados", None)
+    session.pop("ctf_flash", None)
+    session.pop("intentos_fallidos_seguro", None)
     return redirect(url_for("ctf.dashboard"))
 
 
@@ -98,6 +106,7 @@ def paso(num):
         return redirect(url_for("ctf.dashboard"))
 
     completados = get_progreso()
+    flash = session.pop("ctf_flash", None) or {}
     return render_template(
         f"ctf_paso{num}.html",
         paso=PASOS[num],
@@ -105,6 +114,9 @@ def paso(num):
         completados=completados,
         total=len(PASOS),
         desbloqueado=True,
+        exito=flash.get("exito"),
+        siguiente=flash.get("siguiente"),
+        error=flash.get("error"),
     )
 
 
@@ -125,24 +137,17 @@ def verificar(num):
         if len(completados) == len(PASOS):
             return redirect(url_for("ctf.completado"))
 
-        return render_template(
-            f"ctf_paso{num}.html",
-            paso=PASOS[num],
-            num=num,
-            completados=completados,
-            total=len(PASOS),
-            exito=True,
-            siguiente=num + 1 if num < len(PASOS) else None,
-        )
+        # Redirect (Post/Redirect/Get) para que el navegador no deje el POST
+        # en el historial: asi el boton de "volver atras" no pide reenviar
+        # el formulario.
+        session["ctf_flash"] = {
+            "exito": True,
+            "siguiente": num + 1 if num < len(PASOS) else None,
+        }
+        return redirect(url_for("ctf.paso", num=num))
     else:
-        return render_template(
-            f"ctf_paso{num}.html",
-            paso=PASOS[num],
-            num=num,
-            completados=completados,
-            total=len(PASOS),
-            error="Respuesta incorrecta. ¡Segui intentando!",
-        )
+        session["ctf_flash"] = {"error": "Respuesta incorrecta. ¡Segui intentando!"}
+        return redirect(url_for("ctf.paso", num=num))
 
 
 @ctf_bp.route("/completado")

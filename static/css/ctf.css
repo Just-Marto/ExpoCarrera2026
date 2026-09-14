@@ -13,6 +13,32 @@ body {
     flex-direction: column;
 }
 
+/* ── Boton global de volver atras ── */
+.global-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 14px 0 0 24px;
+    border-radius: 50%;
+    border: 1px solid #30363d;
+    background: rgba(22, 27, 34, 0.9);
+    color: #c9d1d9;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+}
+
+.global-back-btn:hover {
+    background: #21262d;
+    border-color: #8b949e;
+    transform: translateX(-2px);
+}
+
 /* ── Header CyberQuest ── */
 .cq-header {
     background: #161b22;
@@ -290,89 +316,6 @@ body {
     overflow-x: auto;
 }
 
-/* ── Base64 Decoder panel ── */
-.decoder-panel {
-    background: #1c2129;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px 0;
-}
-
-.decoder-panel h4 {
-    color: #f0f6fc;
-    font-size: 0.88rem;
-    margin-bottom: 12px;
-}
-
-.decoder-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.decoder-field label {
-    display: block;
-    font-size: 0.75rem;
-    color: #8b949e;
-    margin-bottom: 4px;
-}
-
-.decoder-field textarea {
-    width: 100%;
-    padding: 8px 12px;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 4px;
-    color: #f0f6fc;
-    font-family: 'Consolas', monospace;
-    font-size: 0.85rem;
-    resize: none;
-    outline: none;
-}
-
-.decoder-field textarea:focus {
-    border-color: #00d4aa;
-}
-
-.decoder-btn {
-    align-self: flex-start;
-    padding: 8px 16px;
-    background: #238636;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-}
-
-.decoder-btn:hover {
-    background: #2ea043;
-}
-
-.decoder-output {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 4px;
-    padding: 10px 12px;
-    font-family: 'Consolas', monospace;
-    font-size: 0.9rem;
-    color: #484f58;
-    min-height: 38px;
-}
-
-.decoder-output--success {
-    color: #00d4aa;
-    border-color: rgba(0, 212, 170, 0.3);
-}
-
-.decoder-output--error {
-    color: #f85149;
-    border-color: rgba(248, 81, 73, 0.3);
-}
-
 /* ── Answer form ── */
 .answer-form {
     display: flex;
@@ -602,6 +545,52 @@ body {
     gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* ── Puente al desafio final (login) ── */
+.infiltration-bridge {
+    background: linear-gradient(135deg, #161b22, #1c2531);
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 28px 32px;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto 28px;
+}
+
+.infiltration-bridge .bridge-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.infiltration-bridge h2 {
+    color: #00d4aa;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.infiltration-bridge p {
+    color: #8b949e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.btn-ctf {
+    display: inline-block;
+    background: linear-gradient(135deg, #00d4aa, #0096c7);
+    color: #0d1117;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-ctf:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 212, 170, 0.3);
 }
 
 .btn-outline {

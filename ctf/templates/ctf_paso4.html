@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ctf.css') }}">
 </head>
 <body>
-    <!-- ================================================== -->
-    <!-- DEBUG - Panel de administracion                     -->
-    <!-- TODO: quitar antes de subir a produccion!!          -->
-    <!-- Credencial de acceso: CTF{seguridad_total}          -->
-    <!-- ================================================== -->
-
     <header class="cq-header">
         <div class="cq-brand">
             <div class="cq-logo">CQ</div>
@@ -33,6 +27,8 @@
         </div>
     </div>
 
+    <a href="{{ url_for('ctf.dashboard') }}" class="global-back-btn" aria-label="Volver a CyberQuest">←</a>
+
     <div class="paso-container">
         <div class="paso-header">
             <a href="{{ url_for('ctf.dashboard') }}" class="back-link">← Volver al panel</a>
@@ -41,24 +37,15 @@
             <p>{{ paso.descripcion }}</p>
         </div>
 
-        {% if error %}
-        <div class="msg-error">{{ error }}</div>
-        {% endif %}
-
         <div class="challenge-area">
-            <h3>Panel de acceso restringido</h3>
-            <p style="color: #8b949e; margin-bottom: 12px;">Este panel requiere una credencial especial para acceder. Los desarrolladores del sistema dejaron la contrasena en un lugar donde no deberian...</p>
+            <h3>El login real te espera</h3>
+            <p style="color: #8b949e; margin-bottom: 12px;">Este paso no se resuelve con una respuesta de texto: se resuelve entrando al login del campus virtual sin conocer la contrasena del usuario <code>admin</code>.</p>
             <div class="challenge-content">
-                <span style="color: #f0ad4e;">⚠️ ACCESO RESTRINGIDO</span><br><br>
-                <span style="color: #8b949e;">Este sistema tiene una falla comun: las credenciales estan hardcodeadas en el codigo fuente. Un error que pasa mas seguido de lo que pensas en sistemas reales.</span>
+                <span style="color: #f0ad4e;">⚠️ SIN LIMITE DE INTENTOS</span><br><br>
+                <span style="color: #8b949e;">Este sistema tiene una falla comun: el login no bloquea intentos fallidos y la contrasena de <code>admin</code> es debil. Andá al login y probalo — cuando entres, este paso se completa solo.</span>
             </div>
 
-            <form method="POST" action="{{ url_for('ctf.verificar', num=4) }}">
-                <div class="answer-form">
-                    <input type="text" name="respuesta" class="answer-input" placeholder="Ingresa la credencial..." required autofocus>
-                    <button type="submit" class="btn-submit">Acceder</button>
-                </div>
-            </form>
+            <a href="{{ url_for('login.login_page') }}" class="btn-submit" style="display: inline-block; text-decoration: none; text-align: center; margin-top: 8px;">Ir al login →</a>
         </div>
 
         <div class="hints-section">
@@ -78,9 +65,6 @@
     <footer class="cq-footer">CyberQuest — Expo Ciberseguridad 2026</footer>
 
     <script>
-    // TODO: limpiar antes de deploy
-    var admin_password = "CTF{seguridad_total}";
-
     function toggleHint(btn, id) {
         var hint = document.getElementById(id);
         if (hint.style.display === 'none') {
