@@ -11,7 +11,15 @@
             background: #0d1117;
             color: #c9d1d9;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .config-content {
+            flex: 1;
             padding: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
         }
         .warning-bar {
             background: rgba(240, 173, 78, 0.1);
@@ -56,30 +64,45 @@
             transition: border-color 0.2s;
         }
         .back-btn:hover { border-color: #00d4aa; color: #00d4aa; }
+        .config-footer {
+            background: #161b22;
+            border-top: 1px solid #30363d;
+            color: #484f58;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.72rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
     </style>
 </head>
 <body>
-    <div class="warning-bar">
-        ⚠️ Este archivo no deberia ser accesible. Contiene configuracion interna del sistema.
+    <div class="config-content">
+        <div class="warning-bar">
+            ⚠️ Este archivo no deberia ser accesible. Contiene configuracion interna del sistema.
+        </div>
+
+        <div class="file-header">// /ctf/configuracion — config interna del servidor</div>
+        <div class="json-viewer">
+            {<br>
+            &nbsp;&nbsp;<span class="key">"app"</span>: <span class="string">"UniDemo Campus Virtual"</span>,<br>
+            &nbsp;&nbsp;<span class="key">"version"</span>: <span class="string">"3.2.1"</span>,<br>
+            &nbsp;&nbsp;<span class="key">"entorno"</span>: <span class="string">"produccion"</span>,<br>
+            &nbsp;&nbsp;<span class="key">"debug"</span>: false,<br>
+            &nbsp;&nbsp;<span class="key">"db_host"</span>: <span class="string">"localhost:5432"</span>,<br>
+            &nbsp;&nbsp;<span class="key">"db_nombre"</span>: <span class="string">"unidemo_campus"</span>,<br>
+            &nbsp;&nbsp;<span class="comment">// TODO: cambiar antes del deploy</span><br>
+            &nbsp;&nbsp;<span class="key">"clave_seguridad"</span>: <span class="highlight">"cortafuegos"</span>,<br>
+            &nbsp;&nbsp;<span class="key">"max_intentos_login"</span>: 5,<br>
+            &nbsp;&nbsp;<span class="key">"sesion_timeout_min"</span>: 30,<br>
+            &nbsp;&nbsp;<span class="key">"modulos_activos"</span>: [<span class="string">"auth"</span>, <span class="string">"notas"</span>, <span class="string">"mensajes"</span>]<br>
+            }
+        </div>
+
+        <a href="{{ url_for('ctf.paso', num=3) }}" class="back-btn">← Volver al desafio</a>
     </div>
 
-    <div class="file-header">// /ctf/configuracion — config interna del servidor</div>
-    <div class="json-viewer">
-        {<br>
-        &nbsp;&nbsp;<span class="key">"app"</span>: <span class="string">"UniDemo Campus Virtual"</span>,<br>
-        &nbsp;&nbsp;<span class="key">"version"</span>: <span class="string">"3.2.1"</span>,<br>
-        &nbsp;&nbsp;<span class="key">"entorno"</span>: <span class="string">"produccion"</span>,<br>
-        &nbsp;&nbsp;<span class="key">"debug"</span>: false,<br>
-        &nbsp;&nbsp;<span class="key">"db_host"</span>: <span class="string">"localhost:5432"</span>,<br>
-        &nbsp;&nbsp;<span class="key">"db_nombre"</span>: <span class="string">"unidemo_campus"</span>,<br>
-        &nbsp;&nbsp;<span class="comment">// TODO: cambiar antes del deploy</span><br>
-        &nbsp;&nbsp;<span class="key">"clave_seguridad"</span>: <span class="highlight">"cortafuegos"</span>,<br>
-        &nbsp;&nbsp;<span class="key">"max_intentos_login"</span>: 5,<br>
-        &nbsp;&nbsp;<span class="key">"sesion_timeout_min"</span>: 30,<br>
-        &nbsp;&nbsp;<span class="key">"modulos_activos"</span>: [<span class="string">"auth"</span>, <span class="string">"notas"</span>, <span class="string">"mensajes"</span>]<br>
-        }
-    </div>
-
-    <a href="/ctf/paso/3" class="back-btn">← Volver al desafio</a>
+    <footer class="config-footer">
+        CyberQuest — Expo Ciberseguridad 2026
+    </footer>
 </body>
 </html>

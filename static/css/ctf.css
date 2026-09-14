@@ -225,6 +225,7 @@ body {
 
 /* ── Página de paso individual ── */
 .paso-container {
+    flex: 1;
     max-width: 640px;
     width: 100%;
     margin: 0 auto;
