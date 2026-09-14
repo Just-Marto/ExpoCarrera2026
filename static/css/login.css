@@ -333,8 +333,9 @@ body {
 }
 
 .bf-attempt {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(90px, auto) 1fr;
+    align-items: start;
     gap: 12px;
     padding: 5px 0;
     color: #f28b82;
@@ -352,6 +353,11 @@ body {
 
 .bf-cred {
     color: #c9d1d9;
+    white-space: nowrap;
+}
+
+.bf-result {
+    text-align: right;
 }
 
 .bf-attempt--ok .bf-cred {
