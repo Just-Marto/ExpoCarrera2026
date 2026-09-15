@@ -95,7 +95,7 @@ def reset():
     session.pop("ctf_completados", None)
     session.pop("ctf_flash", None)
     session.pop("intentos_fallidos_seguro", None)
-    return redirect(url_for("ctf.dashboard"))
+    return redirect("/")
 
 
 @ctf_bp.route("/paso/<int:num>")

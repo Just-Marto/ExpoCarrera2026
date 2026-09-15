@@ -76,13 +76,12 @@
                 <h2>Completaste todo el recorrido</h2>
                 <p>Resolviste los 4 desafios de CyberQuest — el ultimo era este login. Diste la vuelta completa: encontrar la falla, explotarla y entender como se previene.</p>
                 <div class="bridge-actions">
-                    <a href="{{ url_for('login.login_seguro_page') }}" class="btn-ctf">Ver la version segura →</a>
                     <a href="{{ url_for('ctf.completado') }}" class="btn-ctf">Ver pantalla final →</a>
                 </div>
             </div>
 
             <div class="hacked-actions">
-                <a href="/" class="btn-secondary">Volver al inicio</a>
+                <a href="{{ url_for('login.login_seguro_page') }}" class="btn-secondary">Ver la version segura</a>
             </div>
         </div>
     </div>
