@@ -70,8 +70,8 @@
         <div class="hints-section">
             <h3 style="color: #f0f6fc; font-size: 0.9rem; margin-bottom: 10px;">¿Necesitás ayuda?</h3>
             {% for pista in paso.pistas %}
-            <button class="hint-btn" onclick="toggleHint(this, 'hint-{{ loop.index }}')">
-                <span class="hint-icon">💡</span> Pista {{ loop.index }}
+            <button class="hint-btn" data-hint-index="{{ loop.index }}" onclick="toggleHint(this, 'hint-{{ loop.index }}')" {% if loop.index > 1 %}disabled{% endif %}>
+                <span class="hint-icon">💡</span> {{ 'Respuesta' if loop.last else 'Pista ' ~ loop.index }}
             </button>
             {% endfor %}
 
@@ -91,6 +91,9 @@
         if (hint.style.display === 'none') {
             hint.style.display = 'block';
             btn.classList.add('hint-btn--revealed');
+            var nextIndex = parseInt(btn.dataset.hintIndex, 10) + 1;
+            var nextBtn = document.querySelector('.hint-btn[data-hint-index="' + nextIndex + '"]');
+            if (nextBtn) { nextBtn.disabled = false; }
         } else {
             hint.style.display = 'none';
             btn.classList.remove('hint-btn--revealed');

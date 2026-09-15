@@ -38,7 +38,7 @@ PASOS = {
     },
     3: {
         "titulo": "El archivo secreto",
-        "descripcion": "Sabes que existe un archivo de configuracion oculto en el servidor. ¿Podes encontrarlo?",
+        "descripcion": "Sabes que existe un archivo de configuracion oculto en el servidor. ¿Podes encontrarlo y descubrir que datos sensibles contiene?",
         "respuesta": "cortafuegos",
         "pistas": [
             "El paso anterior te dio una palabra clave... ¿que pasa si intentas acceder a ese archivo en el navegador?",
