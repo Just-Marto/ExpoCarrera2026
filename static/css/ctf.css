@@ -27,6 +27,9 @@ body {
     color: #c9d1d9;
     font-size: 1.3rem;
     line-height: 1;
+    /* La flecha se dibuja por debajo del centro de su caja de texto: el
+       padding inferior la sube la mitad y la deja centrada en el circulo. */
+    padding-bottom: 0.25em;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.35);
     text-decoration: none;
@@ -202,9 +205,20 @@ body {
     justify-content: center;
     flex-shrink: 0;
     font-size: 1rem;
+    line-height: 1;
+    /* El candado tiene su tinta 1px por debajo del centro de la caja de texto:
+       el padding inferior lo sube la mitad y lo deja opticamente centrado. */
+    padding-bottom: 0.125em;
 }
 
+/* La flecha esta 2px mas abajo que el candado, necesita mas correccion. */
+.task-check--active {
+    padding-bottom: 0.25em;
+}
+
+/* El tilde ya esta casi centrado: necesita menos correccion que el candado. */
 .task-check--done {
+    padding-bottom: 0.0625em;
     background: #238636;
     border-color: #238636;
     color: white;
@@ -234,6 +248,9 @@ body {
 .task-arrow {
     color: #30363d;
     font-size: 1.2rem;
+    line-height: 1;
+    /* El glifo se dibuja por debajo del centro de su caja de texto. */
+    transform: translateY(-0.125em);
 }
 
 .task-card--active .task-arrow {

@@ -29,7 +29,13 @@ pip install -r requirements.txt
 python run.py
 ```
 
-## URLs del proyecto
+## Version online (PythonAnywhere)
+
+Durante la expo la app corre en **https://expouncaus.pythonanywhere.com** (cuenta gratuita, usuario `expouncaus`).
+
+Para publicar cambios: `git push` desde acá, después en la consola Bash de PythonAnywhere `cd ~/ExpoCarrera2026 && git pull` y por último **Reload** en la pestaña Web. Los imprimibles apuntan a esa URL. Al terminar la expo, conviene apagar la web app con **Disable webapp**.
+
+## URLs del proyecto (local)
 
 | URL | Descripción |
 |-----|-------------|

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Cartel — Desafío SQL Injection</title>
+    <title>Cartel — Desafío CyberQuest</title>
     <style>
         @page { size: A4 landscape; margin: 0; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,6 +44,7 @@
         }
         .hint-label {
             font-size: 14px;
+            line-height: 1.5;
             color: #484f58;
             margin-bottom: 4mm;
         }
@@ -63,10 +64,10 @@
 <body>
     <div class="icon">🔓</div>
     <h1>¿Podés entrar<br><span class="accent">sin la contraseña?</span></h1>
-    <p class="subtitle">Intentá hackear el login de un campus virtual.<br>Después, aprendé cómo se previene.</p>
-    <div class="hint-label">PISTA: probá escribir esto en el campo de usuario...</div>
-    <div class="hint-box">' OR '1'='1</div>
-    <div class="url">localhost:5000/login</div>
+    <p class="subtitle">El campus virtual UniDemo tiene una falla de seguridad.<br>Entrá como administrador y después aprendé cómo se previene.</p>
+    <div class="hint-label">PISTA: el usuario admin usa una de las contraseñas más comunes del mundo<br>y el sistema no bloquea los intentos fallidos...</div>
+    <div class="hint-box">admin&nbsp;&nbsp;/&nbsp;&nbsp;????????</div>
+    <div class="url">expouncaus.pythonanywhere.com/ctf</div>
     <div class="footer-text">Expo Ciberseguridad — Ingeniería en Sistemas 2026</div>
 </body>
 </html>

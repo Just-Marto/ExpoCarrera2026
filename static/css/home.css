@@ -27,6 +27,9 @@ body {
     color: #c9d1d9;
     font-size: 1.3rem;
     line-height: 1;
+    /* La flecha se dibuja por debajo del centro de su caja de texto: el
+       padding inferior la sube la mitad y la deja centrada en el circulo. */
+    padding-bottom: 0.25em;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.35);
     text-decoration: none;
