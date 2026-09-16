@@ -54,7 +54,7 @@
             <p style="color: #8b949e; margin-bottom: 12px;">Los servidores web a veces dejan archivos internos accesibles por error. Encontra ese archivo y lee su contenido para descubrir la clave.</p>
             <div class="challenge-content" style="color: #8b949e;">
                 La palabra del paso anterior era: <span style="color: #00d4aa;">configuracion</span><br>
-                Este CTF corre en: <span style="color: #00d4aa;">http://localhost:5000/ctf/</span>
+                Este CTF corre en: <span style="color: #00d4aa;">{{ request.host_url }}ctf/</span>
             </div>
 
             <form method="POST" action="{{ url_for('ctf.verificar', num=3) }}">
@@ -74,7 +74,7 @@
             {% endfor %}
 
             {% for pista in paso.pistas %}
-            <div id="hint-{{ loop.index }}" class="hint-text" style="display: none;">{{ pista|safe }}</div>
+            <div id="hint-{{ loop.index }}" class="hint-text" style="display: none;">{{ pista|replace('{host}', request.host)|safe }}</div>
             {% endfor %}
         </div>
 

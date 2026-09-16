@@ -42,7 +42,7 @@ PASOS = {
         "respuesta": "cortafuegos",
         "pistas": [
             "El paso anterior te dio una palabra clave... ¿que pasa si intentas acceder a ese archivo en el navegador?",
-            "Proba navegar a: <code>localhost:5000/ctf/configuracion</code>",
+            "Proba navegar a: <code>{host}/ctf/configuracion</code>",
             "La respuesta es: <strong>cortafuegos</strong>",
         ],
     },
